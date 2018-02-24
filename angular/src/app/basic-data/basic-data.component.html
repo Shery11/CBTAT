@@ -1,0 +1,93 @@
+  <div class="row">
+            <div class="col-lg-7">
+                <div class="ibox float-e-margins">
+                    
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-6 b-r">
+                            <h3 class="m-t-none m-b">Basic Data</h3>
+                                <form role="form"
+                                #basicForm = "ngForm" (ngSubmit)="updateData(basicForm.value)">
+                                 <div class="form-group"><label>Name</label> <input disabled type="text" name="username" placeholder="Enter email" class="form-control" [ngModel]="data.name"></div>
+                                  <div class="form-group"><label>Addition</label> <input type="text" name="data.addition" placeholder="text" class="form-control" [ngModel]="data.addition"></div>
+                                   <div class="form-group"><label>Customer Id</label> <input type="text" placeholder="Enter customerNumber" name="data.id" class="form-control" [ngModel]="data.id" disabled></div>
+                                    <div class="form-group"><label>Customer Type</label> <input type="text" placeholder="Enter type" class="form-control" name="data.permission" [ngModel]="data.permission" disabled></div>
+
+                                   <h3 class="m-t-none m-b">Address</h3>
+                                     <div class="form-group"><label>Street</label> <input type="text" placeholder="Enter Address" class="form-control" name="data.address" [ngModel]="data.address"></div>
+                                    <div class="form-group"><label>Postal Code</label> <input type="number" placeholder="Enter postalcode" class="form-control" name="data.postalCode" [ngModel]="data.postalCode"></div>
+                                    <div class="form-group"><label>City</label> <input type="text" placeholder="Enter City" class="form-control" name="data.city" [ngModel]="data.city"></div>
+                                    <div class="form-group"><label>Country*</label>
+                                        <select class="form-control m-b" name="data.country" [ngModel]="data.country" >
+                                        <option *ngFor="let x of countries" value="{{x.alpha2Code}}">{{x.name}} </option>
+                                    </select>
+                                        </div>
+
+                                   <h3 class="m-t-none m-b">Contact Data</h3>
+                                   <div class="form-group"><label>Phone*</label> <input type="number" placeholder="Enter Number" class="form-control" name="data.phone" [ngModel]="data.phone"></div>
+                                   <div class="form-group"><label>Fax</label> <input type="number" placeholder="Enter Fax Number" class="form-control" name="data.fax" [ngModel]></div>
+                                   <div class="form-group"><label>email*</label> <input type="email" placeholder="Enter Email" class="form-control" name="data.email" [ngModel]="data.email"></div>
+                                    <div class="form-group"><label>Email (newsletter)</label> <input type="email"  class="form-control" name="data.newsletter" [ngModel]="data.newsletter" ></div>
+                                    <div class="form-group"><label>Email (Technology)</label> <input type="email"  class="form-control" name="data.technology" [ngModel]="data.technology"></div>
+                                    <div class="form-group"><label>Email (accounting)</label> <input type="email"  class="form-control" name="data.accounting" [ngModel]="data.accounting"></div>
+                                    <div>
+                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Save Basic Data</strong></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="col-lg-5">
+                   <!--  <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Horizontal form</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <p>Sign in today for more expirience.</p>
+                                <div class="form-group"><label class="col-lg-2 control-label">Email</label>
+
+                                    <div class="col-lg-10"><input type="email" placeholder="Email" class="form-control"> <span class="help-block m-b-none">Example block-level help text here.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Password</label>
+
+                                    <div class="col-lg-10"><input type="password" placeholder="Password" class="form-control"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <div class="i-checks"><label> <input type="checkbox"><i></i> Remember me </label></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-white" type="submit">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> -->
+
+
+
+                </div>
+            </div>

@@ -1,0 +1,230 @@
+           
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox"> 
+                        <div class="ibox-content">   
+                            <form class="wizard-big"
+                            #userForm = "ngForm" (ngSubmit)="beforeSubmit(userForm.value)" >
+                                <h1>New Domain</h1>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                        <!-- <div class="form-group">
+                                                <label>Account Name *</label>
+                                                <input id="name" name="account" type="text" class="form-control required" 
+                                                [(ngModel)]="accountId" required  placeholder="{{account}}">
+                                            </div> -->
+                                         <div class="form-group">
+                                                <label>Domains*</label>
+                                                <input id="name" ngModel name="name" type="text" class="form-control required" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                    <h3>Domain Contacts </h3>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Owner Contact *</label>
+                                                <input type="text" class="form-control required" disabled 
+                                                  placeholder="Select Owner Contact">
+                                                <select class="form-control m-b required" name="owner" ngModel placeholder="Select Owner Account*">
+                                                    <option *ngFor="let x of contacts" value="{{x.contact.id}}">{{x.contact.name}}
+                                                      <small class="sub-heading" *ngIf="!x.parent_id"><b> -- Owner --</b></small>
+                                                        <small *ngIf="x.parent_id == myId"> - sub-accounts-</small>
+                                                        </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="col-lg-12">
+                                               <div class="form-group">
+                                                <label>Admin Contact *</label>
+                                                <input type="text" class="form-control required" disabled 
+                                                  placeholder="Select Admin Contact">
+                                                <select class="form-control m-b required" name="admin" ngModel placeholder="Select Admin Account*">
+                                                    <option *ngFor="let x of contacts" value="{{x.contact.id}}">{{x.contact.name}}
+                                                      <small class="sub-heading" *ngIf="!x.parent_id"><b> -- Owner --</b></small>
+                                                        <small *ngIf="x.parent_id == myId"> - sub-accounts-</small>
+                                                        </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Tech Contact *</label>
+                                                <input type="text" class="form-control required" disabled 
+                                                  placeholder="Select Tech Contact">
+                                                <select class="form-control m-b required" name="tech" ngModel placeholder="Select Tech Account*">
+                                                    <option *ngFor="let x of contacts" value="{{x.contact.id}}">{{x.contact.name}} 
+                                                        <small class="sub-heading" *ngIf="!x.parent_id"><b> -- Owner --</b></small>
+                                                        <small *ngIf="x.parent_id == myId"> - sub-accounts-</small>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Zone Contact *</label>
+                                                <input type="text" class="form-control required" disabled 
+                                                  placeholder="Select Zone Contact">
+                                                <select class="form-control m-b required" name="zone" ngModel placeholder="Select Zone Account*">
+                                                    <option *ngFor="let x of contacts" value="{{x.contact.id}}">{{x.contact.name}}
+                                                      <small class="sub-heading" *ngIf="!x.parent_id"><b> -- Owner --</b></small>
+                                                        <small *ngIf="x.parent_id == myId"> - sub-accounts-</small>
+                                                        </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name servers *</label>
+                                                <input id="nameservers" name="nameservers" [(ngModel)]="nameservers" type="text" class="form-control required" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
+                                    <div class="col-lg-4">
+                                         <div class="form-group">
+                                                <label>Server IP address *</label>
+                                                <input id="ipaddress" name="ipaddress" type="text" class="form-control required" required [(ngModel)]="ipaddress">
+                                            </div>
+                                    </div>
+                                     <div class="col-lg-4"></div>
+                                    </div> -->
+                                    <h2>Data TransferLock Enabled</h2>
+                                    <input id="transferLockEnabled" name="transferLockEnabled" type="checkbox" class="required" ngModel> <label for="acceptTerms">Enable Transfer Lock.</label>
+                                    <p class="text-danger">{{err}} </p>
+                                </fieldset>
+
+                                 <div class="text-center">
+                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                Buy Domain
+                            </button>
+                                </div>
+                            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <i class="fa fa-laptop modal-icon"></i>
+                                            <h4 class="modal-title">Confirm Domain</h4>
+                                            <small class="font-bold">Please make sure that information is correct before proceeding forward..</small>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p> Please confirm the data before placing order, If you want to proceed, please press Confirm. </p>
+                                            <div class="row" *ngIf="submitData">
+                                                <div class="col-md-12"> 
+                                                    <h3 class="text-success">{{submitData.name}} </h3>  
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(submitData)"  value="submit" >Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- <input type="submit" value="submit" class="btn"> -->
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        <div class="footer">
+            <div class="pull-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2017
+            </div>
+        </div>
+
+    
+        
+    <script>
+        $(document).ready(function(){
+            $("#wizard").steps();
+            $("#form").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex)
+                {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex)
+                    {
+                        return true;
+                    }
+
+                    // Forbid suppressing "Warning" step if the user is to young
+                    if (newIndex === 3 && Number($("#age").val()) < 18)
+                    {
+                        return false;
+                    }
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex)
+                    {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex)
+                {
+                    // Suppress (skip) "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18)
+                    {
+                        $(this).steps("next");
+                    }
+
+                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3)
+                    {
+                        $(this).steps("previous");
+                    }
+                },
+                onFinishing: function (event, currentIndex)
+                {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex)
+                {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                        errorPlacement: function (error, element)
+                        {
+                            element.before(error);
+                        },
+                        rules: {
+                            confirm: {
+                                equalTo: "#password"
+                            }
+                        }
+                    });
+       });
+    </script>
+
+
+ 

@@ -1,0 +1,101 @@
+    
+     <div class="row">
+  <div class="col-md-8">
+           <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
+
+                    <div class="ibox">
+                        <div class="ibox-title" style="padding:12px;">
+                            <h4>Search Domain
+                                 <span class="pull-right text-warning"  data-toggle="tooltip" data-placement="left" title="Click to order"> 
+                                     <span class="fa-stack fa-lg">
+                                        <i class="fa fa-square fa-stack-2x"></i>
+                                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                 </span>
+                                <small class="inline pull-right" *ngIf="cart.length>0">  {{cart.length}} Order Now </small>
+
+                            </h4>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row m-b-sm m-t-sm">
+                                <form
+                                #domainForm = "ngForm" (ngSubmit)="onSubmit(domainForm.value)">
+                                <div class="col-md-11">
+                                    <div class="input-group">
+                                    <input type="text" placeholder="Search Domain"  class="input-sm form-control" name="name" ngModel> <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm btn-primary" > Go!</button> </span></div>
+<!--                                         <p class="text-success"> {{response | json}} </p>
+ -->                                </div>
+                                </form>
+                            </div>
+                            <!-- <div class="row">
+                                 <div class="col-md-12">
+                                    <button routerLink="../new" type="button" id="loading-example-btn" class="btn btn-white btn-sm" ><i class="fa fa-refresh"></i> Order a new Domain</button>
+                                </div>
+                            </div> -->
+
+                            <div class="project-list">
+
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr  *ngFor="let x of response">
+                                        <div class="text-danger text-center" *ngIf="x.status == 'registered'"> Sorry Already registerd</div>
+                                     <div class="text-success"><b> {{x.domainName}} </b></div> <br/>
+                                        <td class="project-status" *ngIf="x.status !== 'registered'">
+                                         <small>Status:</small>   <span class="label label-primary">{{x.status}}</span>
+                                        </td>
+                                        <td class="project-title" *ngIf="x.status !== 'registered'">
+                                            <small>AvailabiliyStart: {{x .generalAvailabilityStart}}</small>
+                             <button routerLink="../new" type="button" id="loading-example-btn" class="btn btn-sucess btn-sm" ><i class="fa fa-refresh"></i> Order Now</button>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-md-4">
+
+                <div class="wrapper wrapper-content animated fadeInUp">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Suggestions </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover">
+                                    <tbody>
+                                    <tr  *ngFor="let x of suggestions">
+                                        <div *ngIf="x.status !== 'registered'">
+                                     <div class="text-success"><b> {{x.domainName}} </b></div> <br/>
+                                        <td class="project-status">
+                                         <small>Status:</small> 
+                                           <span class="label label-primary">{{x.status}}</span>
+                                        </td>
+                                        <td class="project-title">
+                                            <small>  
+                                                 <button type="button" (click)="addToCart(x.domainName)" id="loading-example-btn" class="btn btn-sucess btn-sm" >
+                                                     <i class="fa fa-cart-plus"></i> Order Now</button>
+                                        </small>
+
+                                        </td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+        </div>
+                    </div>
+                </div>
+
+        </div>
+     </div>
