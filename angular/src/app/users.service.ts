@@ -84,7 +84,8 @@ logOut(){
 //}
 // Authenticate Login 
 authenticate(loginObj){
-	  this.http.post('http://localhost:3000/user/authenticate',loginObj)
+	 console.log(loginObj);
+	  this.http.post('http://localhost:3000/users/authenticate',loginObj)
     .map((res)=>res.json()).subscribe((res)=> {
       console.log(res);
      if(res.success){

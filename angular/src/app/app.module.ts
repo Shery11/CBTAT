@@ -46,6 +46,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 
 //guards 
 import { AuthGuard } from './authguard.guard';
+import { RegisterComponent } from './register/register.component';
 
 
 //setting up routes
@@ -58,7 +59,12 @@ const ROUTES = [
  {
    path:'login',
   component:LoginComponent
-},{
+},
+{
+  path:'register',
+ component:RegisterComponent
+}
+,{
   path:'dashboard',canActivate:[AuthGuard],
 	component:DashboardComponent,
   children:[
@@ -134,6 +140,7 @@ const ROUTES = [
     NotfoundComponent,
     LoginComponent,
     HomeComponent,
+    RegisterComponent,
   
   ],
   imports: [
