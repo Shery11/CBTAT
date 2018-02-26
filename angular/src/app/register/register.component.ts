@@ -23,15 +23,13 @@ export class RegisterComponent implements OnInit {
    
     }
   
-  
-  
-    onSubmit(values){
-      this.userService.authenticate(values);
+  onSubmit(values){
+      this.userService.register(values);
       setTimeout(()=>{
               this.err = this.userService.loginErr;
               
       })
-       }
+    }
   
 
 }

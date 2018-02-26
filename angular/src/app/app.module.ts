@@ -47,14 +47,19 @@ import { NotfoundComponent } from './notfound/notfound.component';
 //guards 
 import { AuthGuard } from './authguard.guard';
 import { RegisterComponent } from './register/register.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 //setting up routes
 const ROUTES = [
 {
   path:'',
-  redirectTo:'login',
+  redirectTo:'landing',
   pathMatch:'full'
+},
+{
+  path:'landing',
+ component:LandingComponent
 },
  {
    path:'login',
@@ -141,6 +146,7 @@ const ROUTES = [
     LoginComponent,
     HomeComponent,
     RegisterComponent,
+    LandingComponent,
   
   ],
   imports: [

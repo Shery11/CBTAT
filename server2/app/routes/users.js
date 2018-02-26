@@ -13,6 +13,8 @@ var secret = 'keyboard cat';
 //REGISTER NEW USER
 router.post('/register', function (req, res) {
 
+    console.log("register route hit");
+
     //we want to get all the stuff that is being submitted and paste it into a variable
     var user = new User();
     user.name = req.body.name;

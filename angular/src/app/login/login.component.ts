@@ -18,18 +18,14 @@ err;
     private userService:UsersService,private h:HttpClient) { }
 
   ngOnInit() {
-
- 
   }
-
-
 
   onSubmit(values){
     this.userService.authenticate(values);
     setTimeout(()=>{
             this.err = this.userService.loginErr;
             
-    })
+    },1000)
      }
 
 

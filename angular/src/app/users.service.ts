@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Http, RequestOptions,Response, Headers } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
-
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { CookieService } from 'ngx-cookie';
@@ -151,11 +150,24 @@ updateBasicData(){
 
 }
 
-//Sub Accounts
-createSub(data){
-	//creating a sub acount
-	return this.http.post('http://localhost:3000/user/register', data)
-	.map(res => res.json());
+//registering
+register(data){
+	console.log(data);
+	return this.http.post('http://localhost:3000/users/register', data)
+	.map(res => res.json()).subscribe(res=>{
+	    console.log(res);
+		if(res.success){
+			setTimeout(() =>{
+				this.router.navigateByUrl('/login');
+ 
+	     }, 300);
+		   
+	   }else{
+
+		 this.loginErr = res.message;
+
+	   }
+	});
 }
 
 createDomain(data){
@@ -180,9 +192,7 @@ checkDomain(data){
 }
 //get sub accounts
 getSubAccounts(id){
-	
-	 
-	     return this.http.post('/user/getSubAccounts', {parentId: id},this.getHeaders())
+	 return this.http.post('/user/getSubAccounts', {parentId: id},this.getHeaders())
 	      .map((this.extractData))
 	        .catch(this.handleError);
 }
