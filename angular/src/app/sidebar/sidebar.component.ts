@@ -8,7 +8,7 @@ import {UsersService } from '../users.service';
 export class SidebarComponent implements OnInit {
 username;
 permission;
-  constructor(private zone:NgZone,private userService:UsersService) {
+  constructor(private zone:NgZone,public userService:UsersService) {
   }
 
 
@@ -16,8 +16,9 @@ permission;
  ngOnInit() {
  	   setTimeout(() =>{
   	let b =this.userService.getUser().subscribe((res)=>{
-  		    this.username =res.user.username;
-            this.permission =res.user.permission;
+      console.log(res);
+  		    this.username =res.username;
+            this.permission =res.permission;
   	});
 
 

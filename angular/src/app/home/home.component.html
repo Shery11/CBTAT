@@ -1,36 +1,129 @@
-        <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>Welcome! {{user.username}}</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                          <b>{{user.email}}</b>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
-
-                </div>
-            </div>
-
             <div class="row">
-                 <div class="col-lg-8">
-                     <div class="ibox float-e-margins">
+                <!-- project table start -->
+                <div class="col-lg-8">
+                    <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Last Changed products</h5>
+                            <h5>List of Projects</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <!-- <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a> -->
+                            </div>
                         </div>
-                     </div>
+                        <div class="ibox-content">
+
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Project ID</th>
+                                    <th>Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Description</th>
+                                    <th>More detail</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let project of projects">
+                                    <td>{{project._id}}</td>
+                                    <td>{{project.name}}</td>
+                                    <td>{{project.startDate}}</td>
+                                    <td>{{project.endDate}}</td>
+                                    <td>{{project.description}}</td>
+                                    <td class="center"><a [routerLink]="['/dashboard/project/'+ project._id ]"><span class="label label-warning">Open</span></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <button style="margin-top: 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
+                                    Add new project  <i class="fa fa-plus"></i>  
+                                  </button>
+                                  <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content animated flipInY">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                  <h4 class="modal-title">Add new Project here</h4>
+                                                  <small class="font-bold">Added data will go directly in to the database</small>
+                                              </div>
+                                              <div class="modal-body">
+                                               <div class="row">
+                                                      <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Project Creation Form</h3>
+      
+                                                          <p>Create a new Project</p>
+      
+                                                          <form role="form" #dataForm = "ngForm" (ngSubmit) = "add(dataForm.value)">
+                                                              <div class="form-group"><label>Name</label> <input type="text" placeholder="Name" class="form-control" name="name" ngModel required></div>
+                                                              
+                                                              <div class="form-group"><label>Short Description</label> <input type="text" placeholder="Short description" class="form-control" name="description" ngModel required></div>
+                                                                 
+                                                              <div class="form-group" id="data_5">
+                                                                    <label class="font-normal">Range select</label>
+                                                                    <div class="input-daterange input-group" id="datepicker">
+                                                                        <input type="text" class="input-sm form-control" name="startDate" ngModel required />
+                                                                        <span class="input-group-addon">to</span>
+                                                                        <input type="text" class="input-sm form-control" name="endDate" ngModel required  />
+                                                                    </div>
+                                                                </div>
+
+                                                                
+
+                                                            <div>
+                                                             
+                                                              <button [disabled]="loading" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>submit</strong></button>
+                                                                 
+                                                              </div>
+                                                          </form>
+      
+      
+                                                      </div>
+                                                      <div class="col-sm-6"><h4>Don't know what this is?</h4>
+                                                          <p>Better logout then</p>
+                                                          <p class="text-center">
+                                                              <a href=""><i class="fa fa-database big-icon"></i></a>
+                                                          </p>
+                                                       </div>
+                                              </div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                
+
+                        </div>
+                    </div>
                 </div>
+                <!-- project table end -->
+               <!-- developer table -->
                 <div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Domain Stats</h5>
+                            <h5>Linked Developers</h5>
                         </div>
                         <div class="ibox-content">
-                            <div class="flot-chart">
-                                <div class="flot-chart-pie-content" id="flot-pie-chart"></div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
             </div>
+
+
+                 
                
+              

@@ -25,7 +25,7 @@ extractData(res){
 handleError (error: Response | any) {
 	console.error(error.message || error);
 	return Observable.throw(error.message || error);
-    }
+}
 //checks for token
 //must set header : ....
 checkAuthentiate(){
@@ -37,7 +37,7 @@ checkAuthentiate(){
 	myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
 	   let options = new RequestOptions({ headers: myHeaders });
 				console.log(this.cookieService.get('x-access-token'));
-        return this.http.get('http://localhost:3000/user/getUserData', options)
+        return this.http.get('http://localhost:3000/users/fullUserData', options)
 	        .map((this.extractData))
 	        .catch(this.handleError)
 	        .subscribe(res=>{
@@ -131,7 +131,7 @@ getUsers(){
 }
 //get current user data
 getUser(){		
-	 return this.http.get('http://localhost:3000/user/getUserData', this.getHeaders())
+	 return this.http.get('http://localhost:3000/users/fullUserData', this.getHeaders())
 	        .map((this.extractData))
 	        .catch(this.handleError);
 	 }
@@ -170,26 +170,26 @@ register(data){
 	});
 }
 
-createDomain(data){
-	 let myHeaders = new Headers();
-	myHeaders.append('Content-Type', 'application/json');    
-	//myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
-	   let options = new RequestOptions({ headers: myHeaders });
-	 return this.http.post('/domain/createDomain',data,options)
-  	 //.map((this.extractData))
-	        .catch(this.handleError);
+// createDomain(data){
+// 	 let myHeaders = new Headers();
+// 	myHeaders.append('Content-Type', 'application/json');    
+// 	//myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
+// 	   let options = new RequestOptions({ headers: myHeaders });
+// 	 return this.http.post('/domain/createDomain',data,options)
+//   	 //.map((this.extractData))
+// 	        .catch(this.handleError);
 
-}
-checkDomain(data){
-		 let myHeaders = new Headers();
-	myHeaders.append('Content-Type', 'application/json');    
-	//myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
-	   let options = new RequestOptions({ headers: myHeaders });
-	return this.http.post('http://localhost:3000/domain/domainStatus', data,options)
-	.subscribe(res=>{
-		console.log(res);
-	})
-}
+// }
+// checkDomain(data){
+// 		 let myHeaders = new Headers();
+// 	myHeaders.append('Content-Type', 'application/json');    
+// 	//myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
+// 	   let options = new RequestOptions({ headers: myHeaders });
+// 	return this.http.post('http://localhost:3000/domain/domainStatus', data,options)
+// 	.subscribe(res=>{
+// 		console.log(res);
+// 	})
+// }
 //get sub accounts
 getSubAccounts(id){
 	 return this.http.post('/user/getSubAccounts', {parentId: id},this.getHeaders())

@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { DomainsService } from './domains.service';
 import { ContactsService } from './contacts.service';
 import { UsersService } from './users.service';
+import { ProjectService } from './project.service';
 
 //Component Import
 import { AppComponent } from './app.component';
@@ -31,7 +32,7 @@ import { DomainContactsComponent } from './domain-contacts/domain-contacts.compo
 import { DomainRedirectionComponent } from './domain-redirection/domain-redirection.component';
 import {DomainHeaderComponent } from './domain-header/domain-header.component';
 import { DomainDashboardComponent } from './domain-dashboard/domain-dashboard.component';
-import { DomainNewComponent } from './domain-new/domain-new.component';
+// import { DomainNewComponent } from './domain-new/domain-new.component';
 import { DomainEditComponent } from './domain-edit/domain-edit.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -48,6 +49,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './authguard.guard';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
+import { ProjectComponent } from './project/project.component';
 
 
 //setting up routes
@@ -80,6 +82,10 @@ const ROUTES = [
   path:'home',
   component:HomeComponent,
 },{
+  path:'project/:id',
+  component:ProjectComponent,
+}
+,{
    path:'account',
    component:AccountComponent,
    children:[
@@ -100,7 +106,7 @@ const ROUTES = [
    { path: 'login', component: LoginComponent,data:{route:'dashboard'}},
    { path: 'dashboard', component: DomainDashboardComponent,data:{route:'dashboard'}},
    { path: 'domain', component: DomainComponent,data:{route:'domain'} },
-   { path: 'new', component: DomainNewComponent,data:{route:'domain New'} },
+  //  { path: 'new', component: DomainNewComponent,data:{route:'domain New'} },
    { path: 'Edit', component: DomainEditComponent,data:{route:'domain Edit',id:'111'} },
    { path: 'jobs', component: DomainJobsComponent,data:{route:'jobs'} },
    { path: 'contacts', component: DomainContactsComponent,data:{route:'contacts'} },
@@ -131,7 +137,7 @@ const ROUTES = [
     DomainContactsComponent,
     DomainDashboardComponent,
     DomainRedirectionComponent,
-    DomainNewComponent,
+    // DomainNewComponent,
     DomainEditComponent,
     UserNewComponent,
     UserDetailsComponent,
@@ -147,6 +153,7 @@ const ROUTES = [
     HomeComponent,
     RegisterComponent,
     LandingComponent,
+    ProjectComponent,
   
   ],
   imports: [
@@ -159,7 +166,7 @@ const ROUTES = [
     CookieModule.forRoot()
 
   ],
-  providers: [ContactsService, DomainsService, UsersService,AuthGuard,
+  providers: [ContactsService, DomainsService, UsersService,AuthGuard,ProjectService,
    // {
    //          provide: Http,
    //          useFactory: httpFactory,

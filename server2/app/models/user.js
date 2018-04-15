@@ -47,8 +47,8 @@ var UserSchema = new Schema( {
     name: {type:String, validate: nameValidator},
     dateCreated: { type: Date, default: Date.now },
     memberships: {},
-    relevant_assignments: [{ type : Schema.ObjectId, ref: 'Assignment' }], // with this the user will be connected to his assignments in the fastest way
-    permission: {type: String, required:true, default: 'user'}
+    projects: [{ type : Schema.ObjectId, ref: 'Assignment' }], // with this the user will be connected to his assignments in the fastest way
+    permission: {type: String, required:true, default: 'projectManager'}
 });
 
 /*permission levels: admin moderator user.

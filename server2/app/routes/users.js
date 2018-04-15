@@ -114,7 +114,7 @@ router.get('/fullUserData', function (req, res) {
         }
         if (user) {
             //console.log('not errorrrrrrrrrrrrrr');
-            res.json({success: true ,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, relevant_assignments: user.relevant_assignments});
+            res.json({success: true ,email:user.email,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, projects: user.projects});
         }
     });
 })

@@ -8,17 +8,32 @@ import { UsersService } from '../users.service';
 })
 export class HeaderComponent implements OnInit {
 username;
-  constructor(private userService:UsersService) { }
+  constructor(public userService:UsersService) { }
 
-  ngOnInit() {
-  	   setTimeout(() =>{
-  	let b =this.userService.getUser();
-    b.subscribe(res=>{
-    	this.username= res.user.username;
-    });
-
-},400);
-
-}
+  user ={
+    username: '',
+    email:'',
+    role:''
+  }
+  
+  role='';
+  
+    ngOnInit() {
+            setTimeout(() =>{
+      let b =this.userService.getUser();
+      b.subscribe(res=>{
+        this.user.username= res.userFullName;
+        this.user.email = res.email;
+        this.user.role = res.role;
+        if(res.role == 'projectManager'){
+           this.role = "Project Manager";
+        }else{
+          this.role = "Developer";
+        }
+      });
+  
+  },400);
+  
+    }
 
 }
