@@ -9,6 +9,7 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var cors = require('cors')
 
 var app = express();
 
@@ -35,9 +36,7 @@ app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(bodyParser.urlencoded({extended: true})); // parse application/x-www-form-urlencoded
 
-var cors=require('./cors');
-app.use(cors.permission);
-
+app.use(cors());
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(express.static(path.join(__dirname, 'public'))); // set the static files location /public/img will be /img for users
 
@@ -50,6 +49,7 @@ app.use(cookieParser());
 
 var usersRoute = require('./app/routes/users.js');
 var projectRoute = require('./app/routes/project.js');
+var taskRoute = require('./app/routes/tasks.js');
 // var assignmentsRoute = require('./app/routes/assignments.js');
 // var submissionsRoute = require('./app/routes/submissions.js');
 
@@ -58,6 +58,7 @@ require('./app/passport/passport')(app,passport);
 
 app.use('/users/', usersRoute);
 app.use('/project/',projectRoute);
+app.use('/task/',taskRoute);
 
 
 

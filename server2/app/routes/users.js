@@ -107,13 +107,13 @@ router.post('/currentUser', function (req, res) {
 });
 
 router.get('/fullUserData', function (req, res) {
-    User.findOne({username: req.decoded.username}).exec(function (err, user) {
+    User.findOne({username: req.decoded.username}).populate('projects admins').exec(function (err, user) {
         if (err) {
             res.json({success: false ,message:'no user connected'});
             throw err;
         }
         if (user) {
-            //console.log('not errorrrrrrrrrrrrrr');
+            // console.log(user);
             res.json({success: true ,email:user.email,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, projects: user.projects});
         }
     });

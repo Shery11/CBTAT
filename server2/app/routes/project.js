@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Project = require('../models/project');
+var User = require('../models/user');
 
 
 router.post('/create',function(req,res){
@@ -16,20 +17,49 @@ router.post('/create',function(req,res){
     project.start_date = req.body.startDate;
     project.end_date = req.body.endDate;
     project.short_description = req.body.description;
+    project.admin = req.body.userId;
 
 
     project.save(function(err,data){
 
-    	console.log(err);
-    	console.log(data);
+    	// console.log(err);
+    	// console.log(data);
     	if(err){
     	   res.json({success: false, message: err.message});
         }else{
-        	res.json({success: true, message: "Project created successfully"});
+            // console.log(data);
+             User.findOneAndUpdate({ _id : req.body.userId},{$push:{projects:data._id}},{new: true},function(err,user){
+                if(err){
+                    console.log('error occured');
+                  res.json({success:false,data:err})
+                }else{
+                  res.json({success:true, userData: user,projectData: project});
+                }
+            })
+            // now we have to push data in user
+        	// res.json({success: true, message: "Project created successfully"});
         }
     })
 
 
 })
+
+router.post('/getById',function(req,res){
+    console.log('inside get single project');
+
+    var data = req.body.id; 
+
+    console.log(data);
+
+    Project.findOne({_id: data}).populate('tasks admins admin').exec(function(err,doc){
+        if(err){
+           res.json({success:false,data:err})
+        }else{
+           res.json({success:true,data:doc})
+        }
+    })
+})
+
+
 
 module.exports = router;

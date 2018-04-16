@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit,AfterViewInit{
 user ={
 	username: '',
   email:'',
-  role:''
+  role:'',
+  id: ''
 }
 
 role='';
@@ -30,44 +31,7 @@ public loading = false;
  
 
 
-projects = [
-  {
-    _id:"345345jhk4j5k",
-    name: "XYZ",
-    startDate:"3/5/2018",
-    endDate : "5/7/2018",
-    description:"this is lorem ipsun doller statum "
-  },
-  {
-    _id:"345345jhk4j5k",
-    name: "XYZ",
-    startDate:"3/5/2018",
-    endDate : "5/7/2018",
-    description:"this is lorem ipsun doller statum "
-
-  },
-  {
-    _id:"345345jhk4j5k",
-    name: "XYZ",
-    startDate:"3/5/2018",
-    endDate : "5/7/2018",
-    description:"this is lorem ipsun doller statum "
- },
-  {
-    _id:"345345jhk4j5k",
-    name: "XYZ",
-    startDate:"3/5/2018",
-    endDate : "5/7/2018",
-    description:"this is lorem ipsun doller statum "
- },
-  {
-    _id:"345345jhk4j5k",
-    name: "XYZ",
-    startDate:"3/5/2018",
-    endDate : "5/7/2018",
-    description:"this is lorem ipsun doller statum "
- }
-]
+projects = [];
 
   ngOnInit() {
   	 	   setTimeout(() =>{
@@ -76,6 +40,8 @@ projects = [
           this.user.username= res.userFullName;
           this.user.email = res.email;
           this.user.role = res.role;
+          this.user.id = res._id;
+          this.projects = res.projects;
           if(res.role == 'projectManager'){
             this.role = "Project Manager";
           }else{
@@ -98,15 +64,16 @@ projects = [
 
   add(formData){
     console.log(formData);
+    formData.userId = this.user.id;
     
     this.loading = true;
     
     this.projectService.createProject(formData).subscribe((res)=>{
       console.log(res);
        if(res.success){
-        this.projects.push(formData);
         $('#myModal2').modal('hide');
         this.loading = false;
+        this.ngOnInit();
        }else{
         $('#myModal2').modal('hide');
          alert("Unable to save data");

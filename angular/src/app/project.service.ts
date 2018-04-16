@@ -17,4 +17,23 @@ export class ProjectService {
     
   }
 
+
+  createTask(data){
+    console.log(data);
+    return this.http.post('http://localhost:3000/task/create',data).map((res)=>res.json());
+    
+  }
+
+
+  getProjectByid(data){
+    console.log(data);
+    var d= {
+     id : ''
+    };
+    d.id = data;
+    console.log(d);
+    return this.http.post('http://localhost:3000/project/getById',d).map((res)=>res.json());
+    
+  }
+
 }

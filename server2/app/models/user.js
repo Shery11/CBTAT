@@ -5,6 +5,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 //this library will help us hash the password!
 var bcrypt = require('bcrypt-nodejs');
 
+
 //another validation mechanism for not too long user name etc
 var validate = require('mongoose-validator');
 var nameValidator = [
@@ -47,7 +48,7 @@ var UserSchema = new Schema( {
     name: {type:String, validate: nameValidator},
     dateCreated: { type: Date, default: Date.now },
     memberships: {},
-    projects: [{ type : Schema.ObjectId, ref: 'Assignment' }], // with this the user will be connected to his assignments in the fastest way
+    projects: [{ type : Schema.ObjectId, ref: 'Project' }], // with this the user will be connected to his assignments in the fastest way
     permission: {type: String, required:true, default: 'projectManager'}
 });
 
