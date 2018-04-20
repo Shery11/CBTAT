@@ -72,7 +72,8 @@ getHeaders(){
 logOut(){
 	console.log('logging out')
 	this.cookieService.remove('x-access-token');
-	console.log(this.cookieService.get('x-access-token'))
+	console.log(this.cookieService.get('x-access-token'));
+	this.loggedInStatus = false;
 	setTimeout(()=>{
 			this.router.navigateByUrl('/login');
 	},300)
@@ -145,9 +146,12 @@ createUser(data){
 loadBasicData(){
 	return this.getUser();
 }
-//on update basic data
-updateBasicData(){
 
+
+
+createNewUser(data){
+	console.log(data);
+	return this.http.post('http://localhost:3000/users/registerUser',data).map(res=> res.json());
 }
 
 //registering

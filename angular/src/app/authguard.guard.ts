@@ -9,9 +9,13 @@ export class AuthGuard implements CanActivate {
   	private _cookieService:CookieService) {}; 
 
 canActivate() {
+	
 	if(this._cookieService.get('x-access-token') || this.userService.checkloggedIn()==true){
+		console.log("Can activate");
+		
 		return true;
 	}else{
+		console.log("Can't activate");
 		return false;
 	}
 

@@ -52,6 +52,47 @@ router.post('/register', function (req, res) {
 });
 
 
+// registers new developer
+router.post('/registerUser', function (req, res) {
+
+    console.log("registerUser route hit");
+
+    //we want to get all the stuff that is being submitted and paste it into a variable
+    var user = new User();
+    user.email = req.body.email;
+    user.username = req.body.username;
+    user.password = req.body.password;
+    user.permission = req.body.permission;
+   
+    var managerId = req.body.mid;
+   
+            user.save(function (err,doc) {
+                if (err) {
+                    if (err.errors.name) {
+                        res.json({success: false, message: err.errors.name.message});
+                    } else if (err.errors.username) {
+                        res.json({success: false, message: err.errors.username.message});
+                    } else if (err.errors.email) {
+                        res.json({success: false, message: err.errors.email.message});
+                    } else {
+                        res.json({success: false, message: 'this username or email already in use!! '});
+                    }
+                } else {
+                    
+                     User.findOneAndUpdate({ _id : managerId},{$push:{linked_acccounts:doc._id}},{new: true},function(err,user){
+                        if(err){
+                            console.log('error occured');
+                          res.json({success:false,data:err})
+                        }else{
+                          res.json({success:true, newuserData: doc,managerData: user});
+                        }
+                    })
+                }
+            });
+    
+});
+
+
 //USER LOGIN !
 
 router.post('/authenticate', function (req, res) {
@@ -107,14 +148,14 @@ router.post('/currentUser', function (req, res) {
 });
 
 router.get('/fullUserData', function (req, res) {
-    User.findOne({username: req.decoded.username}).populate('projects admins').exec(function (err, user) {
+    User.findOne({username: req.decoded.username}).populate('projects admins linked_acccounts').exec(function (err, user) {
         if (err) {
             res.json({success: false ,message:'no user connected'});
             throw err;
         }
         if (user) {
             // console.log(user);
-            res.json({success: true ,email:user.email,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, projects: user.projects});
+            res.json({success: true ,email:user.email,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, projects: user.projects,linked_acccounts: user.linked_acccounts});
         }
     });
 })

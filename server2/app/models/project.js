@@ -10,6 +10,7 @@ var ProjectSchema = new Schema({
     end_date: {type: Date, default: Date.now ,required: true},
     admin: { type : Schema.ObjectId, ref: 'User' },
     admins: [{ type : Schema.ObjectId, ref: 'User' }],
+    developers: [{ type : Schema.ObjectId, ref: 'User' }],
     tasks: [{ type : Schema.ObjectId, ref: 'Task' }], //this will reference to standard errors in the db
 });
 

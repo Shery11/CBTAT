@@ -32,6 +32,7 @@ public loading = false;
 
 
 projects = [];
+users = [];
 
   ngOnInit() {
   	 	   setTimeout(() =>{
@@ -42,6 +43,7 @@ projects = [];
           this.user.role = res.role;
           this.user.id = res._id;
           this.projects = res.projects;
+          this.users = res.linked_acccounts;
           if(res.role == 'projectManager'){
             this.role = "Project Manager";
           }else{
@@ -62,7 +64,7 @@ projects = [];
  }
 
 
-  add(formData){
+  createNewProject(formData){
     console.log(formData);
     formData.userId = this.user.id;
     
@@ -82,6 +84,26 @@ projects = [];
     });
  }
 
+  createNewUser(data){
+    this.loading = true;
+    
+    data.permission = 'developer'
+    data.mid = this.user.id;
+    console.log(data);
+
+    this.userService.createNewUser(data).subscribe(res=>{
+      console.log(res);
+      if(res.success){
+        $('#myModal3').modal('hide');
+        this.loading = false;
+        this.ngOnInit();
+      }else{
+        $('#myModal3').modal('hide');
+        this.loading = false;
+        alert("Unable to create new user")
+      }
+    })
+  }
 
 
     onSubmitTemplateBased(value) {
