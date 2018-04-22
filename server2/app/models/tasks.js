@@ -9,7 +9,9 @@ var TasksSchema = new Schema({
     start_date: { type: Date, default: Date.now ,required : true},
     end_date: {type: Date, default: Date.now ,required: true},
     project_id: { type : Schema.ObjectId, ref: 'Project' ,required: true},
-    developer : [{type: Schema.ObjectId, ref: 'User'}]
+    developers: [{type: Schema.ObjectId, ref: 'User'}],
+    status :  {type: Boolean, default: false}
+    // impact : { type : String , default: 10},
 });
 
 

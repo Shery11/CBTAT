@@ -27,16 +27,12 @@ export class ProjectComponent implements OnInit,AfterViewInit {
     role:'',
     id: ''
   }
-
   projectid;
-  
   role='';
   public loading = false;
-   
-  
-  
   tasks = [];
-  
+  data;
+  isDataLoaded = false;
     ngOnInit() {
 
        this.projectid = this.router.snapshot.params['id'];
@@ -49,7 +45,10 @@ export class ProjectComponent implements OnInit,AfterViewInit {
            this.projectService.getProjectByid(this.projectid).subscribe(res=>{
              console.log(res);
              if(res.success){
-              this.tasks = res.data.tasks;  
+              this.tasks = res.data.tasks; 
+              this.data = res.data;
+              console.log(this.data); 
+              this.isDataLoaded = true;
         
              }else{
                alert("unable to load tasks")
@@ -75,11 +74,11 @@ export class ProjectComponent implements OnInit,AfterViewInit {
     }
   
     ngAfterViewInit() {
-      $('#data_5 .input-daterange').datepicker({
-        keyboardNavigation: false,
-        forceParse: false,
-        autoclose: true
-      });
+      // $('#data_5 .input-daterange').datepicker({
+      //   keyboardNavigation: false,
+      //   forceParse: false,
+      //   autoclose: true
+      // });
    }
   
   
@@ -105,11 +104,26 @@ export class ProjectComponent implements OnInit,AfterViewInit {
          }
       });
    }
-  
-  
-  
-      // onSubmitTemplateBased(value) {
-      //     console.log(this.user);
-      // }
 
+
+   addDeveloper(data){
+     this.loading = true;
+     console.log(data);
+     this.projectService.addDeveloperToProject(data).subscribe((res)=>{
+       console.log(res);
+       if(res.success){
+
+        this.loading = false;
+
+
+        this.ngOnInit();
+       }else{
+        alert("Unable to save data");
+      
+        this.loading = false;
+         
+       }
+     })
+   }
+  
 }

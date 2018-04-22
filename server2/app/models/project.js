@@ -12,6 +12,7 @@ var ProjectSchema = new Schema({
     admins: [{ type : Schema.ObjectId, ref: 'User' }],
     developers: [{ type : Schema.ObjectId, ref: 'User' }],
     tasks: [{ type : Schema.ObjectId, ref: 'Task' }], //this will reference to standard errors in the db
+    status : {type : Boolean , default: false}
 });
 
 

@@ -39,7 +39,8 @@ var emailValidator = [
     })
 ];
 
-
+// there are two types of users project managers and developers
+//  issue is with projects
 
 var UserSchema = new Schema( {
     username : {type: String , required : true, unique : true, validate: usernameValidator},
@@ -47,10 +48,10 @@ var UserSchema = new Schema( {
     email: {type: String, required: true, lowercase: true, unique: true, validate: emailValidator},
     name: {type:String, validate: nameValidator},
     dateCreated: { type: Date, default: Date.now },
-    memberships: {},
     projects: [{ type : Schema.ObjectId, ref: 'Project' }], // with this the user will be connected to his assignments in the fastest way
     linked_acccounts :[{type : Schema.ObjectId, ref :'User'}],
-    permission: {type: String, required:true, default: 'projectManager'}
+    permission: {type: String, required:true, default: 'projectManager'},
+    tasks : [{type : Schema.ObjectId , ref: 'Task'}]
 });
 
 /*permission levels: admin moderator user.
@@ -59,13 +60,6 @@ when a user registers he gets a user permission and then can be promoted to mode
 
 UserSchema.plugin(uniqueValidator);
 
-//connect to our database (when i store the database elsewhere it will get their address
-// mongoose.connect('mongodb://localhost/loginapp');
-// this is in comment because we already opened a connection in server.js !
-// var db = mongoose.connection;
-
-
-//now we will have all of our user functions here :
 
 //before saving the schema just encrypt !
 UserSchema.pre('save' , function (next) {

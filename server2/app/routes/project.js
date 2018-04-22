@@ -60,6 +60,27 @@ router.post('/getById',function(req,res){
     })
 })
 
+router.post('/addDeveloper',function(req,res){
+    console.log("add developer route hit");
+    console.log(req.body);
+     Project.findOneAndUpdate({ _id : req.body.projectId},{$push:{developers:data._id}},{new: true},function(err,project){
+        if(err){
+            console.log('error occured');
+          res.json({success:false,data:err})
+        }else{
+            // now we will add project id to user projects
+             User.findOneAndUpdate({ _id : data._id},{$push:{projects:req.body.projectId}},{new: true},function(err,user){
+                if(err){
+                    console.log('error occured');
+                  res.json({success:false,data:err})
+                }else{
+                  res.json({success:true, projectData: project,userData: user});
+                }
+             })
+        }
+     })
+})
+
 
 
 module.exports = router;

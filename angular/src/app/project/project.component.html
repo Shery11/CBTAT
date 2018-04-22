@@ -1,3 +1,69 @@
+<div class="wrapper wrapper-content" *ngIf="isDataLoaded">
+
+
+    
+    
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">Name</span>
+                <h5>Name</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{data.project_name}}</h1>
+                <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                <small>project name</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">Duration</span>
+                <h5>Duration</h5>
+            </div>
+            <div class="ibox-content">
+                <h3 class="no-margins">{{data.start_date | date: 'dd/MM/yyyy'}}</h3>
+                <small>to</small>
+                <h3 class="no-margins">{{data.end_date| date: 'dd/MM/yyyy'}}</h3>
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-primary pull-right">Tasks</span>
+                <h5>Tasks</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{tasks.length}}</h1>
+                <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                <small>tasks</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-danger pull-right">Developers</span>
+                <h5>Developers</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{data.developers.length}}</h1>
+                <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                <small>developers working</small>
+            </div>
+        </div>
+</div>
+
+
+</div>
+
+
+
 <div class="row">
   <!-- project table start -->
   <div class="col-lg-12">
@@ -39,8 +105,8 @@
                   <tr *ngFor="let task of tasks">
                       <td>{{task._id}}</td>
                       <td>{{task.task_name}}</td>
-                      <td>{{task.start_date}}</td>
-                      <td>{{task.end_date}}</td>
+                      <td>{{task.start_date | date: 'dd/MM/yyyy'}}</td>
+                      <td>{{task.end_date | date: 'dd/MM/yyyy'}}</td>
                       <td>{{task.short_description}}</td>
                       <!-- <td class="center"><a [routerLink]="['/dashboard/project/'+ project._id ]"><span class="label label-warning">Open</span></a></td> -->
                   </tr>
@@ -68,7 +134,7 @@
                                                 <div class="form-group"><label>Name</label> <input type="text" placeholder="Name" class="form-control" name="name" ngModel required></div>
                                                 
                                                 <div class="form-group"><label>Short Description</label> <input type="text" placeholder="Short description" class="form-control" name="description" ngModel required></div>
-                                                   
+                                                  
                                                 <div class="form-group" id="data_5">
                                                       <label class="font-normal">Range select</label>
                                                       <div class="input-daterange input-group" id="datepicker">
@@ -110,6 +176,100 @@
       </div>
   </div>
   
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+            <div class="ibox-content">
+
+
+            <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>User Name</th>
+                      
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of data.developers">
+                        <td>{{user._id}}</td>
+                        <td>{{user.username}}</td>
+                       
+                        <!-- <td class="center"><a [routerLink]="['/dashboard/project/'+ project._id ]"><span class="label label-warning">Open</span></a></td> -->
+                    </tr>
+                    </tbody>
+                </table>
+
+                <button style="margin-top: 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
+                        Add new Developer to project  <i class="fa fa-plus"></i>  
+                </button>
+
+
+                <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated flipInY">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Add new Developer</h4>
+                                    <small class="font-bold">Added data will go directly in to the database</small>
+                                </div>
+                                <div class="modal-body">
+                                 <div class="row">
+                                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Add new Developer</h3>
+
+                                            <p>Add develoepr to project</p>
+
+                                            <form role="form" #dataForm = "ngForm" (ngSubmit) = "add(dataForm.value)">
+                                                <!-- <div class="form-group"><label>Name</label> <input type="text" placeholder="Name" class="form-control" name="name" ngModel required></div>
+                                                
+                                                <div class="form-group"><label>Short Description</label> <input type="text" placeholder="Short description" class="form-control" name="description" ngModel required></div>
+                                                  
+                                                <div class="form-group" id="data_5">
+                                                      <label class="font-normal">Range select</label>
+                                                      <div class="input-daterange input-group" id="datepicker">
+                                                          <input type="text" class="input-sm form-control" name="startDate" ngModel required />
+                                                          <span class="input-group-addon">to</span>
+                                                          <input type="text" class="input-sm form-control" name="endDate" ngModel required  />
+                                                      </div>
+                                                  </div> -->
+
+                                                  
+
+                                              <div>
+                                               
+                                                <button [disabled]="loading" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>submit</strong></button>
+                                                   
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                        <div class="col-sm-6"><h4>Don't know what this is?</h4>
+                                            <p>Better logout then</p>
+                                            <p class="text-center">
+                                                <a href=""><i class="fa fa-database big-icon"></i></a>
+                                            </p>
+                                         </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+    </div>
+
+    </div>
+
+</div>
+
 </div>
 
 

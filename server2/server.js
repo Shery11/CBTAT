@@ -50,8 +50,7 @@ app.use(cookieParser());
 var usersRoute = require('./app/routes/users.js');
 var projectRoute = require('./app/routes/project.js');
 var taskRoute = require('./app/routes/tasks.js');
-// var assignmentsRoute = require('./app/routes/assignments.js');
-// var submissionsRoute = require('./app/routes/submissions.js');
+var UserActivityRoute = require('./app/routes/user_activity.js');
 
 //send app and passport to our social file
 require('./app/passport/passport')(app,passport);
@@ -59,7 +58,7 @@ require('./app/passport/passport')(app,passport);
 app.use('/users/', usersRoute);
 app.use('/project/',projectRoute);
 app.use('/task/',taskRoute);
-
+app.use('user_activity',UserActivityRoute);
 
 
 // start app ===============================================
