@@ -15,7 +15,16 @@ token;
 loginErr;
   constructor(private http: Http,private router:Router,
   	private zone:NgZone,
-  	private cookieService:CookieService) { }
+  	private cookieService:CookieService) {
+
+
+
+	
+	
+
+
+
+	   }
 
 
 extractData(res){

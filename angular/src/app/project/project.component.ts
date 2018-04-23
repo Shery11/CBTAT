@@ -25,7 +25,8 @@ export class ProjectComponent implements OnInit,AfterViewInit {
     username: '',
     email:'',
     role:'',
-    id: ''
+    id: '',
+    developers :''
   }
   projectid;
   role='';
@@ -33,8 +34,10 @@ export class ProjectComponent implements OnInit,AfterViewInit {
   tasks = [];
   data;
   isDataLoaded = false;
+  deve;
     ngOnInit() {
 
+   
        this.projectid = this.router.snapshot.params['id'];
 
        console.log(this.projectid);
@@ -58,10 +61,13 @@ export class ProjectComponent implements OnInit,AfterViewInit {
 
               
           this.userService.getUser().subscribe(res=>{
+            console.log(res);
             this.user.username= res.userFullName;
             this.user.email = res.email;
             this.user.role = res.role;
             this.user.id = res._id;
+            this.user.developers = res.linked_acccounts;
+            console.log(this.user);
             if(res.role == 'projectManager'){
               this.role = "Project Manager";
             }else{
@@ -83,7 +89,9 @@ export class ProjectComponent implements OnInit,AfterViewInit {
   
   
     add(formData){
-     formData.userId = this.user.id;
+      // console.log(this.deve);
+      console.log(formData);
+      formData.userId = this.user.id;
       formData.projectId = this.projectid;
 
       console.log(formData);
@@ -107,12 +115,17 @@ export class ProjectComponent implements OnInit,AfterViewInit {
 
 
    addDeveloper(data){
+
+    console.log(data);
+    data.projectId = this.projectid;
+
+
      this.loading = true;
      console.log(data);
      this.projectService.addDeveloperToProject(data).subscribe((res)=>{
        console.log(res);
        if(res.success){
-
+        $('#myModal3').modal('hide');
         this.loading = false;
 
 

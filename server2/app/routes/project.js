@@ -51,7 +51,7 @@ router.post('/getById',function(req,res){
 
     console.log(data);
 
-    Project.findOne({_id: data}).populate('tasks admins admin').exec(function(err,doc){
+    Project.findOne({_id: data}).populate('tasks admins admin developers').exec(function(err,doc){
         if(err){
            res.json({success:false,data:err})
         }else{
@@ -63,13 +63,14 @@ router.post('/getById',function(req,res){
 router.post('/addDeveloper',function(req,res){
     console.log("add developer route hit");
     console.log(req.body);
-     Project.findOneAndUpdate({ _id : req.body.projectId},{$push:{developers:data._id}},{new: true},function(err,project){
+    // $addToSet for unique elements in array
+     Project.findOneAndUpdate({ _id : req.body.projectId},{$addToSet:{developers:req.body.developerId}},{new: true},function(err,project){
         if(err){
             console.log('error occured');
           res.json({success:false,data:err})
         }else{
             // now we will add project id to user projects
-             User.findOneAndUpdate({ _id : data._id},{$push:{projects:req.body.projectId}},{new: true},function(err,user){
+             User.findOneAndUpdate({ _id : req.body.developerId},{$addToSet:{projects:req.body.projectId}},{new: true},function(err,user){
                 if(err){
                     console.log('error occured');
                   res.json({success:false,data:err})

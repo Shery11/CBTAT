@@ -38,13 +38,8 @@ export class ProjectService {
 
   addDeveloperToProject(data){
     console.log(data);
-    var d= {
-      id : ''
-     };
-     d.id = data;
-     console.log(d);
-
-     return this.http.post('http://localhost:3000/project/addDeveloper',d).map((res)=>res.json());
+   
+    return this.http.post('http://localhost:3000/project/addDeveloper',data).map((res)=>res.json());
   }
 
 }
