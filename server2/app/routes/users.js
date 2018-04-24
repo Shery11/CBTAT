@@ -63,6 +63,7 @@ router.post('/registerUser', function (req, res) {
     user.username = req.body.username;
     user.password = req.body.password;
     user.permission = req.body.permission;
+    user.name = req.body.name;
    
     var managerId = req.body.mid;
    
@@ -79,7 +80,7 @@ router.post('/registerUser', function (req, res) {
                     }
                 } else {
                     
-                     User.findOneAndUpdate({ _id : managerId},{$push:{linked_acccounts:doc._id}},{new: true},function(err,user){
+                     User.findOneAndUpdate({ _id : managerId},{$addToSet:{linked_acccounts:doc._id}},{new: true},function(err,user){
                         if(err){
                             console.log('error occured');
                           res.json({success:false,data:err})
@@ -119,6 +120,27 @@ router.post('/authenticate', function (req, res) {
     });
 });
 
+router.post('/addExistingUserToLinkedAccounts',function(req,res){
+
+    console.log(req.body);
+     User.findOne({username: req.body.username}).exec(function (err, user) {
+        if (err) {
+            res.json({success: false ,message:'no user found'});
+        }
+        if (user) {
+            User.findOneAndUpdate({ _id : req.body.managerId},{$addToSet:{linked_acccounts:user._id}},{new: true},function(err,user){
+                if(err){
+                    console.log('error occured');
+                  res.json({success:false,message:"Unable to update"})
+                }else{
+                  res.json({success:true, message: "User added successfully"});
+                }
+            })
+         }
+    });
+})
+
+
 //middleware to get the token
 router.use(function (req, res, next) {
     var token = req.body.token || req.body.query || req.headers['x-access-token'];
@@ -146,6 +168,8 @@ router.post('/currentUser', function (req, res) {
     //sends back the token decoded
     res.send(req.decoded);
 });
+
+
 
 router.get('/fullUserData', function (req, res) {
     User.findOne({username: req.decoded.username}).populate('projects admins linked_acccounts').exec(function (err, user) {

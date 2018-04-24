@@ -46,7 +46,7 @@ var UserSchema = new Schema( {
     username : {type: String , required : true, unique : true, validate: usernameValidator},
     password: {type: String, required: true},
     email: {type: String, required: true, lowercase: true, unique: true, validate: emailValidator},
-    name: {type:String, validate: nameValidator},
+    name: {type:String, validate: nameValidator, required : true},
     dateCreated: { type: Date, default: Date.now },
     projects: [{ type : Schema.ObjectId, ref: 'Project' }], // with this the user will be connected to his assignments in the fastest way
     linked_acccounts :[{type : Schema.ObjectId, ref :'User'}],

@@ -28,6 +28,7 @@ user ={
 
 role='';
 public loading = false;
+deve;  
  
 
 
@@ -101,6 +102,28 @@ users = [];
         $('#myModal3').modal('hide');
         this.loading = false;
         alert("Unable to create new user")
+      }
+    })
+  }
+
+
+
+  addDeveloper(data){
+    
+    data.managerId = this.user.id;
+    console.log(data);
+    
+    this.loading = true
+    this.userService.addExistingUserToLinkedAccounts(data).subscribe(res=>{
+      console.log(res);
+
+      if(res.success){
+        $('#myModal4').modal('hide');
+        this.loading = false;
+        this.ngOnInit();
+      }else{
+        this.loading = false;
+        alert("Unable to add new user")
       }
     })
   }

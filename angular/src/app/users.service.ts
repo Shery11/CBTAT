@@ -15,16 +15,7 @@ token;
 loginErr;
   constructor(private http: Http,private router:Router,
   	private zone:NgZone,
-  	private cookieService:CookieService) {
-
-
-
-	
-	
-
-
-
-	   }
+  	private cookieService:CookieService) {}
 
 
 extractData(res){
@@ -144,7 +135,16 @@ getUser(){
 	 return this.http.get('http://localhost:3000/users/fullUserData', this.getHeaders())
 	        .map((this.extractData))
 	        .catch(this.handleError);
-	 }
+}
+
+addExistingUserToLinkedAccounts(data){
+	console.log(data);
+
+	return this.http.post('http://localhost:3000/users/addExistingUserToLinkedAccounts',data).map(res=> res.json());
+}
+
+
+
 
 //create a new user
 createUser(data){
