@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
 
   data;
   err;
+  deve;
     constructor(private router:Router,private http:Http,
       private userService:UsersService,private h:HttpClient) { }
   
@@ -24,6 +25,10 @@ export class RegisterComponent implements OnInit {
     }
   
   onSubmit(values){
+    console.log(values);
+    console.log(this.deve);
+    values.permission = this.deve;
+    console.log(values);
       this.userService.register(values);
       setTimeout(()=>{
               this.err = this.userService.loginErr;

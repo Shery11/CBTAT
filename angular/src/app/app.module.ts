@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 //Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -50,6 +51,10 @@ import { AuthGuard } from './authguard.guard';
 import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
 import { ProjectComponent } from './project/project.component';
+import { TaskComponent } from './task/task.component';
+import { DevelopersComponent } from './developers/developers.component';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 //setting up routes
@@ -84,6 +89,13 @@ const ROUTES = [
 },{
   path:'project/:id',
   component:ProjectComponent,
+},{
+  path:'project/:pid/:tid',
+  component:TaskComponent,
+},
+{
+  path: 'developers',
+  component: DevelopersComponent
 }
 ,{
    path:'account',
@@ -154,6 +166,8 @@ const ROUTES = [
     RegisterComponent,
     LandingComponent,
     ProjectComponent,
+    TaskComponent,
+    DevelopersComponent,
   
   ],
   imports: [
@@ -163,7 +177,8 @@ const ROUTES = [
     HttpClientModule,
     HttpModule,
     FormsModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    Ng2SearchPipeModule
 
   ],
   providers: [ContactsService, DomainsService, UsersService,AuthGuard,ProjectService,

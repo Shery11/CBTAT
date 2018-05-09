@@ -22,6 +22,7 @@ router.post('/register', function (req, res) {
     user.username = req.body.username;
     user.password = req.body.password;
     var password2 = req.body.password_confirm;
+    user.permission = req.body.permission;
 
     if (user.username == null || user.username == '' || user.password == null || user.password == '' || user.email == null || user.email == '') {
         //sending response back to the client

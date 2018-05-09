@@ -57,11 +57,7 @@ users = [];
   }
 
   ngAfterViewInit() {
-    // $('#data_5 .input-daterange').datepicker({
-    //   keyboardNavigation: false,
-    //   forceParse: false,
-    //   autoclose: true
-    // });
+    
  }
 
 
@@ -85,51 +81,8 @@ users = [];
     });
  }
 
-  createNewUser(data){
-    this.loading = true;
-    
-    data.permission = 'developer'
-    data.mid = this.user.id;
-    console.log(data);
-
-    this.userService.createNewUser(data).subscribe(res=>{
-      console.log(res);
-      if(res.success){
-        $('#myModal3').modal('hide');
-        this.loading = false;
-        this.ngOnInit();
-      }else{
-        $('#myModal3').modal('hide');
-        this.loading = false;
-        alert("Unable to create new user")
-      }
-    })
-  }
-
-
-
-  addDeveloper(data){
-    
-    data.managerId = this.user.id;
-    console.log(data);
-    
-    this.loading = true
-    this.userService.addExistingUserToLinkedAccounts(data).subscribe(res=>{
-      console.log(res);
-
-      if(res.success){
-        $('#myModal4').modal('hide');
-        this.loading = false;
-        this.ngOnInit();
-      }else{
-        this.loading = false;
-        alert("Unable to add new user")
-      }
-    })
-  }
-
-
-    onSubmitTemplateBased(value) {
+ 
+   onSubmitTemplateBased(value) {
         console.log(this.user);
     }
 }

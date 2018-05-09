@@ -42,4 +42,22 @@ export class ProjectService {
     return this.http.post('http://localhost:3000/project/addDeveloper',data).map((res)=>res.json());
   }
 
+
+  getTaskById(taskId){
+    console.log(taskId);
+
+    var id= {
+      id:taskId
+    }
+
+    return this.http.post('http://localhost:3000/task/getTaskById',id).map((res)=>res.json());
+  }
+
+
+  addDeveloperToTask(data){
+    console.log(data);
+
+    return this.http.post('http://localhost:3000/task/addDeveloper',data).map((res)=>res.json());
+  }
+
 }

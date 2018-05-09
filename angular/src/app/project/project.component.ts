@@ -28,6 +28,9 @@ export class ProjectComponent implements OnInit,AfterViewInit {
     id: '',
     developers :''
   }
+
+
+  task = {}
   projectid;
   role='';
   public loading = false;
@@ -80,11 +83,8 @@ export class ProjectComponent implements OnInit,AfterViewInit {
     }
   
     ngAfterViewInit() {
-      // $('#data_5 .input-daterange').datepicker({
-      //   keyboardNavigation: false,
-      //   forceParse: false,
-      //   autoclose: true
-      // });
+    
+ 
    }
   
   
@@ -138,5 +138,48 @@ export class ProjectComponent implements OnInit,AfterViewInit {
        }
      })
    }
+
+
+   openTask(taskId){
+     console.log(taskId);
+      
+     this.projectService.getTaskById(taskId).subscribe(res=>{
+       if(res.success){
+
+        console.log(res);
+
+        this.task = res.task;
+
+        console.log(res.task);
+        console.log(this.task);
+
+        $('#myModal4').modal('show');
+
+       }else{
+         alert("unable to get task data");
+       }
+     })
+
+   }
+
+   closeModal(){
+
+    console.log("Callled");
+
+    this.task = {};
+
+
+    console.log(this.task);
+
+    $('#myModal4').modal('hide');
+
+
+    
+   
+
+
+   }
+
+   
   
 }

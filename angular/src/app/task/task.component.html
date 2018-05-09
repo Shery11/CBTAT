@@ -1,0 +1,173 @@
+<div class="wrapper wrapper-content" *ngIf="isDataLoaded">
+
+
+    
+    
+
+  <div class="row">
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-success pull-right">Name</span>
+                  <h5>Name</h5>
+              </div>
+              <div class="ibox-content">
+                  <h1 class="no-margins">{{taskData.task_name}}</h1>
+                  <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                  <small>task name</small>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-info pull-right">Duration</span>
+                  <h5>Duration</h5>
+              </div>
+              <div class="ibox-content">
+                  <h3 class="no-margins">{{taskData.start_date | date: 'dd/MM/yyyy'}}</h3>
+                  <small>to</small>
+                  <h3 class="no-margins">{{taskData.end_date| date: 'dd/MM/yyyy'}}</h3>
+                
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-primary pull-right">Status</span>
+                  <h5>Task Status</h5>
+              </div>
+              <div class="ibox-content">
+
+                  <h1 class="no-margins" *ngIf="taskData.status;else other_content">
+                       <span class="label label-primary pull-left">Complete</span>
+                  </h1>
+                  
+                  <ng-template #other_content>
+                    <h1 class="no-margins">
+                      <span class="label label-danger pull-left">InComplete</span>
+                    </h1>
+                    </ng-template>
+                  <!-- <h1 class="no-margins">{{taskData.status}}</h1> -->
+                  <br>
+                  <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                  <small>tasks</small>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-danger pull-right">Developers</span>
+                  <h5>Developers</h5>
+              </div>
+              <div class="ibox-content">
+                  <h1 class="no-margins">{{taskData.developers.length}}</h1>
+                  <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                  <small>developers working</small>
+              </div>
+          </div>
+  </div>
+  
+  
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <div class="row">
+      <div class="col-lg-12">
+              <div class="ibox-content">
+  
+  
+              <table class="table table-hover">
+                      <thead>
+                      <tr>
+                          <th>User ID</th>
+                          <th>User Name</th>
+                        
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let user of taskData.developers">
+                          <td>{{user._id}}</td>
+                          <td>{{user.username}}</td>
+                         
+                          <!-- <td class="center"><a [routerLink]="['/dashboard/project/'+ project._id ]"><span class="label label-warning">Open</span></a></td> -->
+                      </tr>
+                      </tbody>
+                  </table>
+  
+                  <button style="margin-top: 5px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
+                          Add new Developer to task  <i class="fa fa-plus"></i>  
+                  </button>
+  
+  
+                  <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content animated flipInY">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                      <h4 class="modal-title">Add new Developer</h4>
+                                      <small class="font-bold">Added data will go directly in to the database</small>
+                                  </div>
+                                  <div class="modal-body">
+                                   <div class="row">
+                                          <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Add new Developer</h3>
+  
+                                              <p>Add developer to task</p>
+  
+                                              <form role="form" #dataForm1 = "ngForm" (ngSubmit) = "addDeveloperToTask(dataForm1.value)">
+                                                
+                                                  <div class="form-group">
+                                                      <label for="power">Select Developer by Username</label>
+                                                      <select class="form-control"  id="power"
+                                                              required
+                                                              [(ngModel)]="deve" name="developerId">
+                                                        <option *ngFor="let pow of projectDevelopers" [value]="pow._id">{{pow.username}}</option>
+                                                      </select>
+                                                    </div>
+                                                    
+  
+                                                <div>
+                                                 
+                                                  <button [disabled]="loading" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>submit</strong></button>
+                                                     
+                                                  </div>
+                                              </form>
+  
+  
+                                          </div>
+                                          <div class="col-sm-6"><h4>Don't know what this is?</h4>
+                                              <p>Better logout then</p>
+                                              <p class="text-center">
+                                                  <a href=""><i class="fa fa-database big-icon"></i></a>
+                                              </p>
+                                           </div>
+                                  </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+  
+  
+      </div>
+  
+      </div>
+  
+  </div>
+  
+  </div>
+  
+  
+     
+   
+  
