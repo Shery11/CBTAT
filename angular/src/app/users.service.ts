@@ -183,33 +183,16 @@ register(data){
 	});
 }
 
-// createDomain(data){
-// 	 let myHeaders = new Headers();
-// 	myHeaders.append('Content-Type', 'application/json');    
-// 	//myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
-// 	   let options = new RequestOptions({ headers: myHeaders });
-// 	 return this.http.post('/domain/createDomain',data,options)
-//   	 //.map((this.extractData))
-// 	        .catch(this.handleError);
+getDeveloperById(developerId){
 
-// }
-// checkDomain(data){
-// 		 let myHeaders = new Headers();
-// 	myHeaders.append('Content-Type', 'application/json');    
-// 	//myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
-// 	   let options = new RequestOptions({ headers: myHeaders });
-// 	return this.http.post('http://localhost:3000/domain/domainStatus', data,options)
-// 	.subscribe(res=>{
-// 		console.log(res);
-// 	})
-// }
-//get sub accounts
-getSubAccounts(id){
-	 return this.http.post('/user/getSubAccounts', {parentId: id},this.getHeaders())
-	      .map((this.extractData))
-	        .catch(this.handleError);
+	var data = {
+		developerId: ''	 
+	};
+
+	data.developerId = developerId;
+
+  return this.http.post('http://localhost:3000/users/getUserById', data).map(res => res.json());
 }
-
 
 
 }

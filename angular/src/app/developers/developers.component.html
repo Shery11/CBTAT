@@ -21,7 +21,8 @@
                                     <th>User Name</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Current Projects</th>
+                                    <th>Active Projects</th>
+                                    <th>Details</th>
                                   
                                 </tr>
                                 </thead>
@@ -32,8 +33,9 @@
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
                                     <td>{{user.projects.length}}</td>
+                                    <td class="center"><a [routerLink]="['/dashboard/userProfile/'+ user._id ]"><span class="label label-warning">Open</span></a></td>
+                         
                                    
-                                    <!-- <td class="center"><a [routerLink]="['/dashboard/project/'+ project._id ]"><span class="label label-warning">Open</span></a></td> -->
                                 </tr>
                                 </tbody>
                             </table>

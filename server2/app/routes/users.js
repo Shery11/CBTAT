@@ -53,6 +53,22 @@ router.post('/register', function (req, res) {
 });
 
 
+// getUser by its id
+router.post('/getUserById',function(req,res){
+    console.log(req.body);
+
+    User.findOne({_id: req.body.developerId}).populate('projects tasks projects[0].admin').exec(function(err,user){
+        if(err){
+         res.json({success: false, message: err});
+        }else{
+
+            res.json({success: true, data: user});
+
+        }
+    })
+
+})
+
 // registers new developer
 router.post('/registerUser', function (req, res) {
 
@@ -98,6 +114,7 @@ router.post('/registerUser', function (req, res) {
 //USER LOGIN !
 
 router.post('/authenticate', function (req, res) {
+    console.log(req.body);
     User.findOne({username: req.body.username}).select('email username password').exec(function (err, user) {
         if (err)
             throw err;

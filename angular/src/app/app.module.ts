@@ -55,6 +55,9 @@ import { TaskComponent } from './task/task.component';
 import { DevelopersComponent } from './developers/developers.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ReportPageComponent } from './report-page/report-page.component';
+import { ReportComponent } from './report/report.component';
 
 
 //setting up routes
@@ -96,35 +99,12 @@ const ROUTES = [
 {
   path: 'developers',
   component: DevelopersComponent
-}
-,{
-   path:'account',
-   component:AccountComponent,
-   children:[
-  {path:'', redirectTo:'users/new', pathMatch:'full'},
-  {path:'basicData', component:BasicDataComponent},
-  {path:'settings', component:AccountSettingsComponent},
-  {path:'users', component:UsersComponent},
-  {path:'newUser', component:UserNewComponent},
-  {path:'details/:id', component:UserDetailsComponent},
-  {path:'subAccounts', component:SubAccountsComponent},
-  {path:'newSub', component:SubNewComponent},]
-  
-},{
-  path:'domains',
-  component:DomainsComponent,
-  children:[
-   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-   { path: 'login', component: LoginComponent,data:{route:'dashboard'}},
-   { path: 'dashboard', component: DomainDashboardComponent,data:{route:'dashboard'}},
-   { path: 'domain', component: DomainComponent,data:{route:'domain'} },
-  //  { path: 'new', component: DomainNewComponent,data:{route:'domain New'} },
-   { path: 'Edit', component: DomainEditComponent,data:{route:'domain Edit',id:'111'} },
-   { path: 'jobs', component: DomainJobsComponent,data:{route:'jobs'} },
-   { path: 'contacts', component: DomainContactsComponent,data:{route:'contacts'} },
-   { path: 'redirections', component: DomainRedirectionComponent,data:{route:'redirections'} }
-   ]},
-   {
+},
+{
+  path: 'userProfile/:did',
+  component: UserProfileComponent
+},
+{
   path:'',
   redirectTo:'home',
   pathMatch:'full'
@@ -168,6 +148,9 @@ const ROUTES = [
     ProjectComponent,
     TaskComponent,
     DevelopersComponent,
+    UserProfileComponent,
+    ReportPageComponent,
+    ReportComponent,
   
   ],
   imports: [

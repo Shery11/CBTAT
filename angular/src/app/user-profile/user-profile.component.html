@@ -1,0 +1,312 @@
+<div class="wrapper wrapper-content animated fadeInRight" *ngIf="loadData" >
+
+
+  <div class="row m-b-lg m-t-lg">
+      <div class="col-md-6">
+
+          <div class="profile-image">
+              <img src="../../assets/img/landing/aqib.jpg" class="img-circle circle-border m-b-md" alt="profile">
+          </div>
+          <div class="profile-info">
+              <div class="">
+                  <div>
+                      <h2 class="no-margins">
+                          {{developerData.name}}
+                      </h2>
+                      <h4>{{developerData.permission}}</h4>
+                      <small>
+                          There are many variations of passages of Lorem Ipsum available, but the majority
+                          have suffered alteration in some form Ipsum available.
+                      </small>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <table class="table small m-b-xs">
+              <tbody>
+              <tr>
+                  <td>
+                      <strong>{{developerData.projects.length}}</strong> Projects
+                  </td>
+                  <td>
+                      <strong>{{developerData.tasks.length}}</strong> tasks
+                  </td>
+
+              </tr>
+              <tr>
+                  <td>
+                      <strong>61</strong> Comments
+                  </td>
+                  <td>
+                      <strong>54</strong> Articles
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <strong>154</strong> Tags
+                  </td>
+                  <td>
+                      <strong>32</strong> Friends
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+      <div class="col-md-3">
+          <small>Hours worked</small>
+          <h2 class="no-margins">206</h2>
+          <div id="sparkline1"></div>
+      </div>
+
+
+  </div>
+  <div class="row">
+
+      <div class="col-lg-6">
+
+          <div class="ibox">
+              <div class="ibox-content">
+                      <h3>About {{developerData.name}}</h3>
+
+                  <p class="small">
+                      There are many variations of passages of Lorem Ipsum available, but the majority have
+                      suffered alteration in some form, by injected humour, or randomised words which don't.
+                      <br/>
+                      <br/>
+                      If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                      anything embarrassing
+                  </p>
+
+                  <p class="small font-bold">
+                      <span><i class="fa fa-circle text-navy"></i> Online status</span>
+                      </p>
+
+              </div>
+          </div>
+
+         
+
+          <div class="ibox">
+              <div class="ibox-content">
+                  <h3>Private message</h3>
+
+                  <p class="small">
+                      Send private message to {{developerData.name}}
+                  </p>
+
+                  <div class="form-group">
+                      <label>Subject</label>
+                      <input type="email" class="form-control" placeholder="Message subject">
+                  </div>
+                  <div class="form-group">
+                      <label>Message</label>
+                      <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary btn-block">Send</button>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Project list</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover no-margins">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Name</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <!-- here we are only supposed to show thr peojects of that project manager -->
+                    <tr *ngFor="let project of developerData.projects">
+                        <td>
+                          <small *ngIf="project.status; else other" ><span class="label label-primary">Completed</span></small>
+                          <ng-template #other><span class="label label-danger">Pending</span></ng-template>
+                        </td>
+                        <td><i class="fa fa-clock-o"></i> {{project.start_date | date: 'dd/MM/yyyy'}}</td>
+                        <td><i class="fa fa-clock-o"></i> {{project.end_date | date: 'dd/MM/yyyy'}} </td>
+                        <td>{{project.project_name}}</td>
+                          <!-- a modal will open and user will enter the time and othee details which will the be sent to server and report will be generated and will redirect user to report page -->
+                                  
+                        <td class="center"><a data-toggle="modal" data-target="#myModal3"><span class="label label-warning">Open</span></a></td>
+
+                    </tr>
+
+                    <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated flipInY">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Generate Report</h4>
+                                    <small class="font-bold">Added data will go directly in to the database</small>
+                                </div>
+                                <div class="modal-body">
+                                 <div class="row">
+                                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Report Generation Form</h3>
+
+                                            <p>Report Generation form</p>
+<!-- 
+                                            <form role="form" #dataForm1 = "ngForm" (ngSubmit) = "addDeveloper(dataForm1.value)">
+                                              
+                                                <div class="form-group">
+                                                    <label for="power">Select Developer by Username</label>
+                                                    <select class="form-control"  id="power"
+                                                            required
+                                                            [(ngModel)]="deve" name="developerId">
+                                                      <option *ngFor="let pow of user.developers" [value]="pow._id">{{pow.username}}</option>
+                                                    </select>
+                                                  </div>
+                                                  
+
+                                              <div>
+                                               
+                                                <button [disabled]="loading" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>submit</strong></button>
+                                                   
+                                                </div>
+                                            </form> -->
+
+
+                                        </div>
+                                        <div class="col-sm-6"><h4>Don't know what this is?</h4>
+                                            <p>Better logout then</p>
+                                            <p class="text-center">
+                                                <a href=""><i class="fa fa-database big-icon"></i></a>
+                                            </p>
+                                         </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Task list</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover no-margins">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Name</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let task of developerData.tasks">
+                        <td>
+                          <small *ngIf="task.status; else other" ><span class="label label-primary">Completed</span></small>
+                          <ng-template #other><span class="label label-danger">Pending</span></ng-template>
+                        </td>
+                        <td><i class="fa fa-clock-o"></i> {{task.start_date | date: 'dd/MM/yyyy'}}</td>
+                        <td><i class="fa fa-clock-o"></i> {{task.end_date | date: 'dd/MM/yyyy'}} </td>
+                        <td>{{task.task_name}}</td>
+                          <!-- a modal will open and user will enter the time and othee details which will the be sent to server and report will be generated and will redirect user to report page -->
+                                  
+                        <td class="center"><a data-toggle="modal" data-target="#myModal3"><span class="label label-warning">Open</span></a></td>
+
+                    </tr>
+
+                    <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated flipInY">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Generate Report</h4>
+                                    <small class="font-bold">Added data will go directly in to the database</small>
+                                </div>
+                                <div class="modal-body">
+                                 <div class="row">
+                                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Report Generation Form</h3>
+
+                                            <p>Report Generation form</p>
+<!-- 
+                                            <form role="form" #dataForm1 = "ngForm" (ngSubmit) = "addDeveloper(dataForm1.value)">
+                                              
+                                                <div class="form-group">
+                                                    <label for="power">Select Developer by Username</label>
+                                                    <select class="form-control"  id="power"
+                                                            required
+                                                            [(ngModel)]="deve" name="developerId">
+                                                      <option *ngFor="let pow of user.developers" [value]="pow._id">{{pow.username}}</option>
+                                                    </select>
+                                                  </div>
+                                                  
+
+                                              <div>
+                                               
+                                                <button [disabled]="loading" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>submit</strong></button>
+                                                   
+                                                </div>
+                                            </form> -->
+
+
+                                        </div>
+                                        <div class="col-sm-6"><h4>Don't know what this is?</h4>
+                                            <p>Better logout then</p>
+                                            <p class="text-center">
+                                                <a href=""><i class="fa fa-database big-icon"></i></a>
+                                            </p>
+                                         </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+  </div>
+
+</div>
