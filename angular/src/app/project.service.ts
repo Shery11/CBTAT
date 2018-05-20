@@ -13,14 +13,14 @@ export class ProjectService {
 
   createProject(data){
     console.log(data);
-    return this.http.post('http://localhost:3000/project/create',data).map((res)=>res.json());
+    return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/project/create',data).map((res)=>res.json());
     
   }
 
 
   createTask(data){
     console.log(data);
-    return this.http.post('http://localhost:3000/task/create',data).map((res)=>res.json());
+    return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/task/create',data).map((res)=>res.json());
     
   }
 
@@ -32,14 +32,14 @@ export class ProjectService {
     };
     d.id = data;
     console.log(d);
-    return this.http.post('http://localhost:3000/project/getById',d).map((res)=>res.json());
+    return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/project/getById',d).map((res)=>res.json());
     
   }
 
   addDeveloperToProject(data){
     console.log(data);
    
-    return this.http.post('http://localhost:3000/project/addDeveloper',data).map((res)=>res.json());
+    return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/project/addDeveloper',data).map((res)=>res.json());
   }
 
 
@@ -50,14 +50,14 @@ export class ProjectService {
       id:taskId
     }
 
-    return this.http.post('http://localhost:3000/task/getTaskById',id).map((res)=>res.json());
+    return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/task/getTaskById',id).map((res)=>res.json());
   }
 
 
   addDeveloperToTask(data){
     console.log(data);
 
-    return this.http.post('http://localhost:3000/task/addDeveloper',data).map((res)=>res.json());
+    return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/task/addDeveloper',data).map((res)=>res.json());
   }
 
 }

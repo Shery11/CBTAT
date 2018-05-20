@@ -1,3 +1,6 @@
+const functions = require('firebase-functions');
+
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -65,7 +68,17 @@ app.use('user_activity',UserActivityRoute);
 
 
 // start app ===============================================
-app.listen(port);
-console.log('Magic happens on port ' + port);           // shoutout to the user
-exports = module.exports = app;                         // expose app
+// app.listen(port);
+// console.log('Magic happens on port ' + port);           // shoutout to the user
+// exports = module.exports = app;                         // expose app
 
+
+exports.cbtat = functions.https.onRequest(app);
+
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.cbtat = functions.https.onRequest((request, response) => {
+//    response.send("Hello from Firebase!");
+// });
