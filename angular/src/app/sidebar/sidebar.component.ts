@@ -18,7 +18,7 @@ permission;
   	let b =this.userService.getUser().subscribe((res)=>{
       console.log(res);
   		    this.username =res.username;
-            this.permission =res.permission;
+            this.permission =res.role;
   	});
 
 

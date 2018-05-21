@@ -33,7 +33,7 @@ import { DevelopersComponent } from './developers/developers.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ReportPageComponent } from './report-page/report-page.component';
-import { ReportComponent } from './report/report.component';
+import { DeveloperProfileComponent } from './developer-profile/developer-profile.component';
 
 
 //setting up routes
@@ -54,9 +54,10 @@ const ROUTES = [
 {
   path:'register',
  component:RegisterComponent
-}
-,{
-  path:'dashboard',canActivate:[AuthGuard],
+},
+{
+  path:'dashboard',
+  canActivate:[AuthGuard],
 	component:DashboardComponent,
   children:[
 {
@@ -82,6 +83,14 @@ const ROUTES = [
   redirectTo:'home',
   pathMatch:'full'
 },
+{
+  path:'developerProfile',
+  component: DeveloperProfileComponent
+},
+{
+  path:'report',
+  component: ReportPageComponent
+}
  ] //closing Dashboards Child
 }//closing dashboard
 
@@ -104,7 +113,7 @@ const ROUTES = [
     DevelopersComponent,
     UserProfileComponent,
     ReportPageComponent,
-    ReportComponent,
+    DeveloperProfileComponent,
   
   ],
   imports: [

@@ -78,10 +78,7 @@ logOut(){
 			this.router.navigateByUrl('/login');
 	},300)
 }
-//get Token 
-//getToken(){
-	//return this.token;
-//}
+
 // Authenticate Login 
 authenticate(loginObj){
 	 console.log(loginObj);
@@ -96,7 +93,14 @@ authenticate(loginObj){
        this.token = res.token;
        this.cookieService.put('x-access-token', this.token);
       setTimeout(() =>{
-      	     this.router.navigateByUrl('/dashboard');
+		  if(res.data.permission === "developer"){
+             this.router.navigateByUrl('/dashboard/developerProfile')
+		  }else{
+
+			this.router.navigateByUrl('/dashboard');
+
+		  }
+      	    
 
       }, 300);
 
@@ -123,13 +127,8 @@ routeCheck(){
 	//	this.router.navigate['login'];
 	}
 }
-// USER
 
-//get All Users
-getUsers(){
-	return this.http.get('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/api/contacts')
-			.map(res => res.json());
-}
+
 //get current user data
 getUser(){		
 	 return this.http.get('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/fullUserData', this.getHeaders())
@@ -143,14 +142,6 @@ addExistingUserToLinkedAccounts(data){
 	return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/addExistingUserToLinkedAccounts',data).map(res=> res.json());
 }
 
-
-
-
-//create a new user
-createUser(data){
-	return this.http.post('/user/register',data)
-			.map(res => res.json());
-}
 //populate basic data
 loadBasicData(){
 	return this.getUser();

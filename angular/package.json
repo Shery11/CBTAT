@@ -24,6 +24,7 @@
     "@angular/router": "^4.0.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
+    "chart.js": "^2.7.2",
     "core-js": "^2.4.1",
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
