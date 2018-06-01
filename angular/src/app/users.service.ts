@@ -13,6 +13,7 @@ user;
 loggedInStatus;
 token;
 loginErr;
+URL = "http://localhost:3000";
   constructor(private http: Http,private router:Router,
   	private zone:NgZone,
   	private cookieService:CookieService) {}
@@ -37,7 +38,7 @@ checkAuthentiate(){
 	myHeaders.append('x-access-token', this.cookieService.get('x-access-token'));   
 	   let options = new RequestOptions({ headers: myHeaders });
 				console.log(this.cookieService.get('x-access-token'));
-        return this.http.get('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/fullUserData', options)
+        return this.http.get(URL+'/users/fullUserData', options)
 	        .map((this.extractData))
 	        .catch(this.handleError)
 	        .subscribe(res=>{
@@ -82,7 +83,7 @@ logOut(){
 // Authenticate Login 
 authenticate(loginObj){
 	 console.log(loginObj);
-	  this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/authenticate',loginObj)
+	  this.http.post(URL+'/users/authenticate',loginObj)
     .map((res)=>res.json()).subscribe((res)=> {
       console.log(res);
      if(res.success){
@@ -131,7 +132,7 @@ routeCheck(){
 
 //get current user data
 getUser(){		
-	 return this.http.get('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/fullUserData', this.getHeaders())
+	 return this.http.get(URL+'/users/fullUserData', this.getHeaders())
 	        .map((this.extractData))
 	        .catch(this.handleError);
 }
@@ -139,7 +140,7 @@ getUser(){
 addExistingUserToLinkedAccounts(data){
 	console.log(data);
 
-	return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/addExistingUserToLinkedAccounts',data).map(res=> res.json());
+	return this.http.post(URL+'/users/addExistingUserToLinkedAccounts',data).map(res=> res.json());
 }
 
 //populate basic data
@@ -151,13 +152,13 @@ loadBasicData(){
 
 createNewUser(data){
 	console.log(data);
-	return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/registerUser',data).map(res=> res.json());
+	return this.http.post(URL+'/users/registerUser',data).map(res=> res.json());
 }
 
 //registering
 register(data){
 	console.log(data);
-	return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/register', data)
+	return this.http.post(URL+'/users/register', data)
 	.map(res => res.json()).subscribe(res=>{
 	    console.log(res);
 		if(res.success){
@@ -182,7 +183,7 @@ getDeveloperById(developerId){
 
 	data.developerId = developerId;
 
-  return this.http.post('https://us-central1-donkey-rewards.cloudfunctions.net/cbtat/users/getUserById', data).map(res => res.json());
+  return this.http.post(URL+'/users/getUserById', data).map(res => res.json());
 }
 
 

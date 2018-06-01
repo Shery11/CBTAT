@@ -57,7 +57,7 @@ router.post('/register', function (req, res) {
 router.post('/getUserById',function(req,res){
     console.log(req.body);
 
-    User.findOne({_id: req.body.developerId}).populate('projects tasks projects[0].admin').exec(function(err,user){
+    User.findOne({_id: req.body.developerId}).populate('projects tasks').exec(function(err,user){
         if(err){
          res.json({success: false, message: err});
         }else{
@@ -115,7 +115,7 @@ router.post('/registerUser', function (req, res) {
 
 router.post('/authenticate', function (req, res) {
     console.log(req.body);
-    User.findOne({username: req.body.username}).select('email username password').exec(function (err, user) {
+    User.findOne({username: req.body.username}).exec(function (err, user) {
         if (err)
             throw err;
         if (!user) {
@@ -132,7 +132,7 @@ router.post('/authenticate', function (req, res) {
                 //this is the place where we can tell the user is authenticated, lets give him a token for 24 hours!
                 var token = jwt.sign({username: user.username, email: user.email}, secret, {expiresIn: '1h'});
                 //return the success plus the token
-                res.json({success: true, message: 'User authenticated and getting 1h of surfing', token: token});
+                res.json({success: true, message: 'User authenticated and getting 1h of surfing', token: token,data:user});
             }
         }
     });
@@ -190,14 +190,14 @@ router.post('/currentUser', function (req, res) {
 
 
 router.get('/fullUserData', function (req, res) {
-    User.findOne({username: req.decoded.username}).populate('projects admins linked_acccounts').exec(function (err, user) {
+    User.findOne({username: req.decoded.username}).populate('projects admins linked_acccounts tasks').exec(function (err, user) {
         if (err) {
             res.json({success: false ,message:'no user connected'});
             throw err;
         }
         if (user) {
             // console.log(user);
-            res.json({success: true ,email:user.email,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, projects: user.projects,linked_acccounts: user.linked_acccounts});
+            res.json({success: true ,email:user.email,username: user.username, userFullName: user.name, role: user.permission, _id: user._id, projects: user.projects,linked_acccounts: user.linked_acccounts,user : user});
         }
     });
 })

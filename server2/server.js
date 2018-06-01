@@ -14,7 +14,6 @@ var cors = require('cors')
 var app = express();
 
 
-
 //connect to our local database
 // mongoose.connect('mongodb://localhost/cbtat', function (err) {
 //     if (err) {
@@ -61,11 +60,16 @@ require('./app/passport/passport')(app,passport);
 app.use('/users/', usersRoute);
 app.use('/project/',projectRoute);
 app.use('/task/',taskRoute);
-app.use('user_activity',UserActivityRoute);
+app.use('/userActivity/',UserActivityRoute);
+
+
 
 
 // start app ===============================================
 app.listen(port);
 console.log('Magic happens on port ' + port);           // shoutout to the user
 exports = module.exports = app;                         // expose app
+
+
+// exports.cbtat = functions.https.onRequest(app);
 
