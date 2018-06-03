@@ -15,7 +15,6 @@ var ProjectSchema = new Schema({
     status : {type : Boolean , default: false}
 });
 
-
 //now we need a variable that we can access outside of this file
 
 module.exports = mongoose.model('Project', ProjectSchema);

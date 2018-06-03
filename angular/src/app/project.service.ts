@@ -16,14 +16,14 @@ export class ProjectService {
 
   createProject(data){
     console.log(data);
-    return this.http.post(URL+'/project/create',data).map((res)=>res.json());
+    return this.http.post(this.URL+'/project/create',data).map((res)=>res.json());
     
   }
 
 
   createTask(data){
     console.log(data);
-    return this.http.post(URL+'/task/create',data).map((res)=>res.json());
+    return this.http.post(this.URL+'/task/create',data).map((res)=>res.json());
     
   }
 
@@ -35,14 +35,14 @@ export class ProjectService {
     };
     d.id = data;
     console.log(d);
-    return this.http.post(URL+'/project/getById',d).map((res)=>res.json());
+    return this.http.post(this.URL+'/project/getById',d).map((res)=>res.json());
     
   }
 
   addDeveloperToProject(data){
     console.log(data);
    
-    return this.http.post(URL+'/project/addDeveloper',data).map((res)=>res.json());
+    return this.http.post(this.URL+'/project/addDeveloper',data).map((res)=>res.json());
   }
 
 
@@ -53,14 +53,14 @@ export class ProjectService {
       id:taskId
     }
 
-    return this.http.post(URL+'/task/getTaskById',id).map((res)=>res.json());
+    return this.http.post(this.URL+'/task/getTaskById',id).map((res)=>res.json());
   }
 
 
   addDeveloperToTask(data){
     console.log(data);
 
-    return this.http.post(URL+'/task/addDeveloper',data).map((res)=>res.json());
+    return this.http.post(this.URL+'/task/addDeveloper',data).map((res)=>res.json());
   }
 
 }

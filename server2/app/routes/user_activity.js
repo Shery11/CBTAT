@@ -28,10 +28,6 @@ router.post('/save',function(req,res){
 
     console.log(userActivity);
 
-
-
-
-
     userActivity.save(function(err,doc){
         if(err){
         	console.log(err);
@@ -50,9 +46,9 @@ router.post('/save',function(req,res){
         }
     })
 
-  
-
-
 })
+
+
+
 
 module.exports = router;

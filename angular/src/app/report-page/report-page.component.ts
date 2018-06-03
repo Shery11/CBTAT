@@ -32,10 +32,6 @@ export class ReportPageComponent implements OnInit {
 
     this.DoughnutChart = new Chart('doughnutChart', {type: 'doughnut', data: doughnutData, options:doughnutOptions});
 
-    
-
-    
-
-  }
+}
 
 }
