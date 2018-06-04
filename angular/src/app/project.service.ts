@@ -63,4 +63,11 @@ export class ProjectService {
     return this.http.post(this.URL+'/task/addDeveloper',data).map((res)=>res.json());
   }
 
+
+  generateReport(data){
+    console.log(data);
+
+    return this.http.post(this.URL+'/userActivity/generateReport',data).map((res)=>res.json());
+  }
+
 }

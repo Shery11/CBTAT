@@ -141,12 +141,14 @@
                           <small *ngIf="project.status; else other" ><span class="label label-primary">Completed</span></small>
                           <ng-template #other><span class="label label-danger">Pending</span></ng-template>
                         </td>
+                        <td><i class="fa fa-clock-o"></i> {{project._id}}</td>
+                       
                         <td><i class="fa fa-clock-o"></i> {{project.start_date | date: 'dd/MM/yyyy'}}</td>
                         <td><i class="fa fa-clock-o"></i> {{project.end_date | date: 'dd/MM/yyyy'}} </td>
                         <td>{{project.project_name}}</td>
                           <!-- a modal will open and user will enter the time and other details which will the be sent to server and report will be generated and will redirect user to report page -->
                                   
-                        <td class="center"><a data-toggle="modal" data-target="#myModal3"><span class="label label-warning">Generate Report</span></a></td>
+                        <td class="center"><a data-toggle="modal" data-target="#myModal3"><span class="label label-warning" (click)="setProjectID(project._id)">Generate Report</span></a></td>
 
                     </tr>
 
@@ -163,17 +165,17 @@
                                         <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">Report Generation Form</h3>
 
                                             <p>Report Generation form</p>
-                                          <!-- 
-                                            <form role="form" #dataForm1 = "ngForm" (ngSubmit) = "addDeveloper(dataForm1.value)">
+                                          
+                                            <form role="form" #dataForm1 = "ngForm" (ngSubmit) = "generateReport(dataForm1.value)">
                                               
-                                                <div class="form-group">
-                                                    <label for="power">Select Developer by Username</label>
-                                                    <select class="form-control"  id="power"
-                                                            required
-                                                            [(ngModel)]="deve" name="developerId">
-                                                      <option *ngFor="let pow of user.developers" [value]="pow._id">{{pow.username}}</option>
-                                                    </select>
-                                                  </div>
+                                                <div class="form-group" id="data_5">
+                                                    <label class="font-normal">Range select</label>
+                                                    <div class="input-daterange input-group" id="datepicker">
+                                                        <input type="text" class="input-sm form-control" name="startDate" ngModel required />
+                                                        <span class="input-group-addon">to</span>
+                                                        <input type="text" class="input-sm form-control" name="endDate" ngModel required  />
+                                                    </div>
+                                                </div>
                                                   
 
                                               <div>
@@ -181,7 +183,7 @@
                                                 <button [disabled]="loading" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>submit</strong></button>
                                                    
                                                 </div>
-                                            </form> -->
+                                            </form>
 
 
                                         </div>

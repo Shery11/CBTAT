@@ -18,6 +18,8 @@ export class UserProfileComponent implements OnInit {
   developerData;
   loadData = false;
   projects = [];
+  loading = false;
+  recentProjectId;
 
 
   constructor(private router:ActivatedRoute,private userService:UsersService,private projectService: ProjectService,private _cookieService:CookieService) { }
@@ -52,6 +54,47 @@ export class UserProfileComponent implements OnInit {
 
   findDeveloperProjects(developerProjects){
     
+  }
+
+
+  setProjectID(id){
+    console.log("clicked");
+    this.recentProjectId = id;
+    console.log(this.recentProjectId);
+  }
+
+
+  generateReport(formData){
+
+    //  we need project id and user id as aswell
+
+    console.log(this.developerId);
+    console.log(this.recentProjectId);
+
+    console.log(formData);
+
+    var data = {
+      projectId : this.recentProjectId,
+      developerId : this.developerId,
+      startTime: new Date( formData.startDate),
+      endTime : new Date( formData.endDate)
+    }
+
+
+    this.projectService.generateReport(data).subscribe(res=>{
+      console.log(res)
+      this.loading = true;
+      if(res.success){
+        this.loading = false;
+        $('#myModal3').modal('hide');
+        
+      }else{
+        this.loading = false;
+        $('#myModal3').modal('hide');
+        alert("unable tpop generate report");
+      }
+    })
+
   }
 
 }

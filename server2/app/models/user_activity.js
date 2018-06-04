@@ -15,7 +15,9 @@ var user_activitySchema = new Schema({
     notes : [{type : String}],
     switchShots : [{type : String}],
     start_time : {type : String},
-    end_time :{type : String}
+    end_time :{type : String},
+    webcamShots:[{type: String}],
+    screenShots : [{type : String}]
 
 });
 
