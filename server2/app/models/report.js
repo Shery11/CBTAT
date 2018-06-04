@@ -9,7 +9,9 @@ var applicationSchema = mongoose.Schema({ AppName: String, Duration: String, Des
 var report_Schema = new Schema({
     mouse_strokes : {type: Number },
     applications : [applicationSchema],
-    switchShots : [{type: String}]
+    switchShots : [{type: String}],
+    screenShots : [{type: String}],
+    webcamShots : [{type : String}]
 
 });
 

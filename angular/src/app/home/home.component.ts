@@ -36,7 +36,7 @@ projects = [];
 users = [];
 
   ngOnInit() {
-  	 	   setTimeout(() =>{
+  	setTimeout(() =>{
         let b =this.userService.getUser();
         b.subscribe(res=>{
           this.user.username= res.userFullName;

@@ -70,4 +70,15 @@ export class ProjectService {
     return this.http.post(this.URL+'/userActivity/generateReport',data).map((res)=>res.json());
   }
 
+
+  getReportById(id){
+     var data = {
+       id : id
+     }
+    console.log(data);
+
+    return this.http.post(this.URL+'/userActivity/getReportById',data).map((res)=>res.json());
+
+  }
+
 }

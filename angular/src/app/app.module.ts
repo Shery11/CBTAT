@@ -88,7 +88,7 @@ const ROUTES = [
   component: DeveloperProfileComponent
 },
 {
-  path:'report',
+  path:'report/:rid',
   component: ReportPageComponent
 }
  ] //closing Dashboards Child

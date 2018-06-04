@@ -47,6 +47,22 @@ router.post('/save',function(req,res){
         }
     })
 
+});
+
+
+
+router.post('/getReportById',function(req,res){
+
+    console.log(req.body.id);
+
+    Report.findOne({_id:req.body.id}).exec(function(err,report){
+        if(err){
+            res.json({success: false,message: "unable to generate report"})
+        }else{
+            res.json({success : true, data: report });
+        }
+    })
+
 })
 
 
@@ -66,10 +82,7 @@ router.post('/generateReport',function(req,res){
     // console.log(startUnixTime);
     // console.log(endUnixTime);
 
-    
-
-
-     User.findOne({_id: req.body.developerId}).populate('user_activity').exec(function(err,user){
+    User.findOne({_id: req.body.developerId}).populate('user_activity').exec(function(err,user){
         if(err){
          res.json({success: false, message: err});
         }else{
@@ -150,16 +163,20 @@ function processing(activities){
     var KeyboardMouseActivity = 0;
     var applications = [];
     var switchShots = [];
+    var screenShots = [];
+    var webcamShots = [];
 
     activities.forEach(function(activity){
         // console.log(activity);
-          console.log("========================================================================")
+        console.log("========================================================================")
       
         KeyboardMouseActivity = KeyboardMouseActivity + Number(activity.mouse_strokes);
         console.log(activity.applications);
 
         applications = applications.concat(activity.applications);
         switchShots = switchShots.concat(activity.switchShots);
+        screenShots = screenShots.concat(activity.screenShots);
+        webcamShots = webcamShots.concat(activity.webcamShots);
 
     })
 
@@ -173,6 +190,8 @@ function processing(activities){
     report.mouse_strokes = KeyboardMouseActivity;
     report.applications = applications;
     report.switchShots = switchShots; 
+    report.screenShots = screenShots;
+    report.webcamShots = webcamShots;
 
     return report;
 

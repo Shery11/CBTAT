@@ -20,6 +20,9 @@ export class UserProfileComponent implements OnInit {
   projects = [];
   loading = false;
   recentProjectId;
+  showReportButton = false;
+  reportid;
+  message;
 
 
   constructor(private router:ActivatedRoute,private userService:UsersService,private projectService: ProjectService,private _cookieService:CookieService) { }
@@ -86,15 +89,26 @@ export class UserProfileComponent implements OnInit {
       this.loading = true;
       if(res.success){
         this.loading = false;
-        $('#myModal3').modal('hide');
+       
+        this.showReportButton = true;
+        this.message = "Click on this button to get the report";
+        this.reportid = res.data;
         
       }else{
         this.loading = false;
-        $('#myModal3').modal('hide');
-        alert("unable tpop generate report");
+        this.showReportButton = false;
+        // $('#myModal3').modal('hide');
+        alert("unable top generate report");
       }
     })
 
+
+    
+
+  }
+
+  hideModal(){
+    $('#myModal3').modal('hide');
   }
 
 }
