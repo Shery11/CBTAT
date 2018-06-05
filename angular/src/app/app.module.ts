@@ -36,6 +36,9 @@ import { ReportPageComponent } from './report-page/report-page.component';
 import { DeveloperProfileComponent } from './developer-profile/developer-profile.component';
 
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
+
 //setting up routes
 const ROUTES = [
 {
@@ -124,7 +127,8 @@ const ROUTES = [
     HttpModule,
     FormsModule,
     CookieModule.forRoot(),
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxSpinnerModule
 
   ],
   providers: [UsersService,AuthGuard,ProjectService],

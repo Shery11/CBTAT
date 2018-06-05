@@ -27,7 +27,9 @@ export class ReportPageComponent implements OnInit {
   colors = [];
   mouseStrokes;
 
-  constructor(private router:ActivatedRoute,private userService:UsersService,private projectService: ProjectService,private _cookieService:CookieService) { }
+
+
+  constructor(private router:ActivatedRoute,private projectService: ProjectService) { }
 
   ngOnInit() {
 
@@ -47,6 +49,8 @@ export class ReportPageComponent implements OnInit {
           this.mouseStrokes =  res.data.mouse_strokes;
           this.applications = res.data.applications;
           this.switchShots = res.data.switchShots;
+          this.webcamShots = res.data.webcamShots;
+          this.screenShots = res.data.screenShots;
 
 
           this.applications.forEach((application)=>{

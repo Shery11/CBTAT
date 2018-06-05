@@ -21,13 +21,14 @@ router.post('/save',function(req,res){
     userActivity.notes = req.body.Notes;
     userActivity.switchShots = req.body.SwitchShots;
     userActivity.webcamShots = req.body.WebCamShots;
+    userActivity.screenShots = req.body.ScreenShots;
     userActivity.project_id = req.body.project_id;
     userActivity.task_id = req.body.task_id;
     userActivity.user_id = req.body._id;
-    userActivity.start_time = req.body.start_time;
-    userActivity.end_time = req.body.end_time;
+    userActivity.start_time = req.body.start;
+    userActivity.end_time = req.body.end;
 
-    console.log(userActivity);
+    // console.log(userActivity);
 
     userActivity.save(function(err,doc){
         if(err){
@@ -135,18 +136,22 @@ function filterProjects(activities,projectId,starttime,endtime){
    // console.log(activities);  
    // // we will have an array here
    var projectActivities = [];
-   console.log(projectId);  
+   // console.log(activities);  
    activities.forEach(function(activity){
 
     // console.log(activity);
      
      // filter activity
-     console.log(activity.project_id,projectId);
+     console.log(activity.start_time,activity.end_time);
+     console.log("greator","less");
+     console.log(starttime,endtime);
      if(activity.project_id == projectId){
         
-        console.log("activity matches");
+        console.log(activity.start_time  >= starttime , endtime >= activity.end_time );
+       
         if( activity.start_time  >= starttime  && endtime >= activity.end_time){
-           projectActivities.push(activity);     
+           projectActivities.push(activity); 
+            console.log("activity matches");    
         }
        
      }
@@ -171,7 +176,7 @@ function processing(activities){
         console.log("========================================================================")
       
         KeyboardMouseActivity = KeyboardMouseActivity + Number(activity.mouse_strokes);
-        console.log(activity.applications);
+        // console.log(activity);
 
         applications = applications.concat(activity.applications);
         switchShots = switchShots.concat(activity.switchShots);

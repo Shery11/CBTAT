@@ -7,6 +7,8 @@ import 'rxjs/add/operator/map';
 import { UsersService } from '../users.service';
 declare var $ :any;
 
+
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -25,7 +27,7 @@ export class UserProfileComponent implements OnInit {
   message;
 
 
-  constructor(private router:ActivatedRoute,private userService:UsersService,private projectService: ProjectService,private _cookieService:CookieService) { }
+  constructor(private router:ActivatedRoute,private userService:UsersService,private projectService: ProjectService) { }
 
   ngOnInit() {
 
@@ -71,6 +73,8 @@ export class UserProfileComponent implements OnInit {
 
     //  we need project id and user id as aswell
 
+    this.loading = true;
+
     console.log(this.developerId);
     console.log(this.recentProjectId);
 
@@ -86,7 +90,7 @@ export class UserProfileComponent implements OnInit {
 
     this.projectService.generateReport(data).subscribe(res=>{
       console.log(res)
-      this.loading = true;
+     
       if(res.success){
         this.loading = false;
        
